@@ -39,5 +39,11 @@ func main() {
 		})
 	})
 
+	router.GET("/projects", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "projects.html", gin.H{
+			"title": "Projects",
+		})
+	})
+
 	log.Fatalln(router.Run(":8080"))
 }

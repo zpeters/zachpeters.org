@@ -1,0 +1,93 @@
+{{template "header.html"}}
+<article>
+  <h2>Live Projects</h2>
+  <section>
+    <h3>Dropsearch (2024-Current)</h3>
+    <p>
+      <a href="https://github.com/zpeters/dropsearch">Dropsearch</a> is
+      a small project to learn more about
+      <a href="https://www.meilisearch.com/"><em>Meilisearch</em></a>
+      <label for="container" class="margin-toggle sidenote-number"></labeL>
+      <input type="checkbox" id="container" class="margin-toggle" />
+      <span class="sidenote">
+        Meilisearch is a search engine
+        designed for developers. It provides a simple API for integrating
+        full-text search functionality.
+      </span>
+      .
+      Learning
+      the <em>search</em> was this simple to implement has really opened
+      my creativity and thoughts on other projects like this in the future.
+    </p>
+    <p>
+      Future plans include a more refined search, possibly with a basic
+      query structure to list tags, etc. Eventually, I would like to expand
+      this out to a general <em>bookmarks and history</em> search
+    </p>
+  </section>
+
+  <section>
+    <h3>Scratch Notes (2023-Current)</h3>
+    <p>
+      <a href="https://scratch.zachpeters.org">Scratch Notes</a> is a minimal
+      note-taking application. This was written in Go using
+      <a href="https://docs.gofiber.io/">Fiber</a> and
+      <a href="https://sqlite.org/index.html">Sqlite</a>. I used this project
+      as an excuse to learn more about <a href="">litestream</a> so there is an
+      intersting bit about how this works. When the application boots up
+      <label for="container" class="margin-toggle sidenote-number"></labeL>
+      <input type="checkbox" id="container" class="margin-toggle" />
+      <span class="sidenote">Example
+        <a href="https://gist.github.com/zpeters/08d325dc3c435f31ab8f0b5ea63260e8">
+          <em>Dockerfile</em></a> and
+        <a href="https://gist.github.com/zpeters/ecf742fe4a4538c434fd866c49fcaa8e">
+          <em>start.sh</em></a> script</span>
+      it
+      will check for an existing backup on remote storage, if that exists and
+      there isn't a local database it will restore it. Then it will continue
+      with regular replications. For some reason with this I really struggled
+      to get litestream working with a local <a href="https://min.io">
+        <em>minio</em></a>
+      instance. So I have documented my config for future reference
+      <label for="litestream" class="margin-toggle sidenote-number"></labeL>
+      <input type="checkbox" id="litestream" class="margin-toggle" />
+      <span class="sidenote">
+        <a href="https://gist.github.com/zpeters/a2b967a2647297161e799e1bb7c005d7">
+          <em>litestream.yml</em>
+        </a>
+      </span>
+    </p>
+  </section>
+
+  <section>
+    <h3>Monkey Radio Reborn (2019-Current)</h3>
+    <p>
+      Write a little about the history, etc
+    </p>
+  </section>
+
+  <section>
+    <h3>Oblique Strategies (2022)</h3>
+    <p>
+      backstory on this
+      why did i build it
+    </p>
+  </section>
+
+  <section>
+    <h3>Deep Thoughts (2020)</h3>
+    <p>
+      just a technical exercise
+    </p>
+  </section>
+</article>
+
+
+<article>
+  <section>
+    <h3>Project Pages</h3>
+  </section>
+</article>
+
+
+{{template "footer.html"}}
