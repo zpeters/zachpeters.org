@@ -13,6 +13,7 @@ func main() {
 	router := gin.Default()
 
 	router.Static("/assets", "./assets")
+	router.StaticFile("/favicon.ico", "./assets/favicon.ico")
 
 	router.LoadHTMLGlob("templates/*")
 
@@ -27,8 +28,14 @@ func main() {
 	})
 
 	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", gin.H{
-			"title": "Home Page",
+		c.HTML(http.StatusOK, "home.html", gin.H{
+			"title": "Welcome",
+		})
+	})
+
+	router.GET("/playground", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "playground.html", gin.H{
+			"title": "CSS Playground",
 		})
 	})
 

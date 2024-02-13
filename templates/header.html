@@ -1,0 +1,29 @@
+{{define "header.html"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zach Peters Homepage - {{.title}}</title>
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="/assets/tufte.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Zach Peters Homepage</h1>
+    <p class="subtitle">A collection of projects, random musings and handy information</p>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/playground">Playground</a></li>
+      <li><a href="/projects">Projects</a></li>
+      <li><a href="/markdown/example">Blog</a></li>
+      <li><a href="/apps">Recommended Apps</a></li>
+      <li><a href="/articles">Favorite Articles</a></li>
+    </ul>
+  </nav>
+  <section>
+    {{end}}

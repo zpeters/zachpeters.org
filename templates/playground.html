@@ -1,0 +1,53 @@
+{{template "header.html"}}
+<h2>{{.title}}</h2>
+
+<section>
+  <p><span class="newthought">In his later books<label for="sn-in-his-later-books"
+        class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="sn-in-his-later-books"
+      class="margin-toggle" /><span class="sidenote"><a href="http://www.edwardtufte.com/tufte/books_be"><em>Beautiful
+          Evidence</em></a></span>, Tufte starts each section with a bit of vertical space, a non-indented paragraph,
+    and the first few words of the sentence set in small caps. For this we use a span with the class
+    <code>newthought</code>, as demonstrated at the beginning of this paragraph. Vertical spacing is accomplished
+    separately through <code>&lt;section&gt;</code> tags. Be consistent: though we do so in this paragraph for the
+    purpose of demonstration, do not alternate use of header elements and the <code>newthought</code> technique. Pick
+    one approach and stick to it.</p>
+</section>
+
+<section>
+  this is another section
+</section>
+
+
+<section>
+  <h2>Epigraphs</h2>
+  <div class="epigraph">
+    <blockquote>
+      <p>something amazing goes here i know it</p>
+      <footer>by someone</footer>
+    </blockquote>
+  </div>
+</section>
+
+<section>
+  <h2>figures</h2>
+  <p><label for="mn-figure-1" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-figure-1"
+      class="margin-toggle" /><span class="marginnote"><img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/The_Rhinoceros_%28NGA_1964.8.697%29_enhanced.png/600px-The_Rhinoceros_%28NGA_1964.8.697%29_enhanced.png"
+        alt="Image of a Rhinoceros" />F.J. Cole,
+      “The History of Albrecht Dürer’s Rhinoceros in Zooological Literature,” <em>Science, Medicine, and History: Essays
+        on the Evolution of Scientific Thought and Medical Practice</em> (London, 1953), ed. E. Ashworth Underwood,
+      337-356. From page 71 of Edward Tufte’s <em>Visual Explanations</em>.</span> But tight integration of graphics
+    with text is central to Tufte’s work even when those graphics are ancillary to the main body of a text. In many of
+    those cases, a margin figure may be most appropriate. To place figures in the margin, just wrap an image (or
+    whatever) in a margin note inside a <code>p</code> tag, as seen to the right of this paragraph.</p>
+
+</section>
+
+<p>
+  This is something with <label for="sn-extensive-use-of-sidenotes" class="margin-toggle sidenote-number"></label><input
+    type="checkbox" id="sn-extensive-use-of-sidenotes" class="margin-toggle" /><span class="sidenote">This is a
+    sidenote.</span>
+</p>
+
+
+{{template "footer.html"}}

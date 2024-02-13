@@ -1,1 +1,14 @@
-// /* assets/css/style.css */
+nav * {
+  font-style: italic;
+}
+
+nav ul {
+  padding-top: 16px;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+nav li {
+  display: inline-block;
+  padding-right: 18px;
+}
