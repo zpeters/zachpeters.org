@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{.title}}</title>
+  <!-- Update the href to point to your static CSS file -->
+  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="/assets/tufte.css" />
+
+</head>
+
+<body>
+  <div id="wrapper">
+    <aside id="sidebar">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/page1">Page 1</a></li>
+        <li><a href="/page2">Page 2</a></li>
+        <!-- Link to your markdown-rendered page -->
+        <li><a href="/markdown/example">Markdown Example</a></li>
+      </ul>
+    </aside>
+    <section id="main-content">
+      <h1>Welcome to the Home Page</h1>
+      <p>This is a basic example of a homepage using Gin and templates in Go. Check out the <a
+          href="/markdown/example">Markdown Example</a> page.</p>
+    </section>
+  </div>
+</body>
+
+</html>
