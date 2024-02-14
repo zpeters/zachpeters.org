@@ -12,3 +12,12 @@ nav li {
   display: inline-block;
   padding-right: 18px;
 }
+
+#myImage {
+  padding-bottom: 10px;
+}
+
+#footerText {
+  margin-left: 32px;
+  font-style: italic;
+}
