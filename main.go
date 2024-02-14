@@ -17,6 +17,10 @@ func main() {
 
 	router.LoadHTMLGlob("templates/*")
 
+	router.NoRoute(func(c *gin.Context) {
+		c.HTML(http.StatusNotFound, "notfound.html", gin.H{})
+	})
+
 	router.GET("/markdown/:filename", func(c *gin.Context) {
 		filename := c.Param("filename")
 		markdown, err := os.ReadFile("markdown/" + filename + ".md")
@@ -33,15 +37,15 @@ func main() {
 		})
 	})
 
-	router.GET("/playground", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "playground.html", gin.H{
-			"title": "CSS Playground",
-		})
-	})
-
 	router.GET("/projects", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "projects.html", gin.H{
 			"title": "Projects",
+		})
+	})
+
+	router.GET("/recommendedapps", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "recommendedapps.html", gin.H{
+			"title": "Recommended Applications",
 		})
 	})
 
