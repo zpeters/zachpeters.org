@@ -1,9 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"strings"
+
+	"github.com/gin-contrib/gzip"
 
 	"github.com/gin-gonic/gin"
 	"github.com/russross/blackfriday/v2"
@@ -11,6 +15,17 @@ import (
 
 func main() {
 	router := gin.Default()
+
+	router.Use(gzip.Gzip(gzip.DefaultCompression))
+
+	// Set cache control for static assets
+	router.Use(func(c *gin.Context) {
+		fmt.Println(c.Request.URL.Path)
+		if strings.HasPrefix(c.Request.URL.Path, "/assets/") {
+			c.Header("Cache-Control", "private, max-age=86400")
+		}
+		c.Next()
+	})
 
 	router.Static("/assets", "./assets")
 	router.StaticFile("/favicon.ico", "./assets/favicon.ico")
