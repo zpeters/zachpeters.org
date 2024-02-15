@@ -1,0 +1,14 @@
+{{template "header.html"}}
+<h2>{{.title}}</h2>
+
+{{range .posts}}
+<section>
+  <h3><a href="/blog/{{.Path}}">{{.FancyName}}</a></h3>
+  <em>
+    This is about a {{.ReadingTime}} read
+    written on {{.DateFormatted}}.
+  </em>
+</section>
+{{end}}
+
+{{template "footer.html"}}

@@ -1,17 +1,33 @@
+// main is our entry point
 package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/gin-contrib/gzip"
+	"github.com/hako/durafmt"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 
 	"github.com/gin-gonic/gin"
-	"github.com/russross/blackfriday/v2"
 )
+
+type Post struct {
+	FancyName     string
+	Path          string
+	Date          time.Time
+	DateFormatted string
+	ReadingTime   string
+	Content       string
+	WordCount     int
+}
 
 func main() {
 	router := gin.Default()
@@ -30,20 +46,72 @@ func main() {
 	router.Static("/assets", "./assets")
 	router.StaticFile("/favicon.ico", "./assets/favicon.ico")
 
-	router.LoadHTMLGlob("templates/*")
+	router.LoadHTMLGlob("templates/**/*")
 
 	router.NoRoute(func(c *gin.Context) {
-		c.HTML(http.StatusNotFound, "notfound.html", gin.H{})
+		c.HTML(http.StatusNotFound, "404.html", gin.H{})
 	})
 
-	router.GET("/markdown/:filename", func(c *gin.Context) {
-		filename := c.Param("filename")
-		markdown, err := os.ReadFile("markdown/" + filename + ".md")
+	router.GET("/blog", func(c *gin.Context) {
+		// TODO sort by file date
+		var posts []Post
+
+		var readingSpeed = 238
+
+		files, err := os.ReadDir("./templates/blog/")
 		if err != nil {
-			c.String(http.StatusNotFound, "file not found")
+			log.Println(err)
+			c.HTML(http.StatusInternalServerError, "500.html", gin.H{})
 		}
-		html := blackfriday.Run(markdown)
-		c.Data(http.StatusOK, "text/html; charset=utf-8", html)
+
+		caser := cases.Title(language.AmericanEnglish)
+
+		for _, file := range files {
+
+			if file.IsDir() {
+				continue
+			}
+
+			// get some file info
+			info, err := file.Info()
+			if err != nil {
+				log.Println(err)
+				c.HTML(http.StatusInternalServerError, "500.html", gin.H{})
+			}
+			modTime := info.ModTime()
+
+			// get some file content
+			filePath := "./templates/blog/" + file.Name()
+			content, err := ioutil.ReadFile(filePath)
+			if err != nil {
+				log.Println(err)
+				c.HTML(http.StatusInternalServerError, "500.html", gin.H{})
+			}
+
+			// estimate reading time
+			text := string(content)
+			wordCount := len(strings.Fields(text))
+			estimatedReadingMinutes := float64(wordCount) / float64(readingSpeed)
+			estimatedTime := time.Duration(estimatedReadingMinutes) * time.Minute
+			humanTime := durafmt.Parse(estimatedTime).String()
+
+			// make our post object
+			post := Post{
+				FancyName:     caser.String(strings.TrimSuffix(file.Name(), filepath.Ext(file.Name()))),
+				Path:          file.Name(),
+				Date:          modTime,
+				DateFormatted: modTime.Format("Monday, January 02, 2006"),
+				ReadingTime:   humanTime,
+				WordCount:     wordCount,
+			}
+			posts = append(posts, post)
+		}
+
+		c.HTML(http.StatusOK, "bloglist.html", gin.H{
+			"title": "Blog Entries",
+			"posts": posts,
+		})
+
 	})
 
 	router.GET("/", func(c *gin.Context) {
