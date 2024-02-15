@@ -7,11 +7,11 @@ RUN go build -o main .
 
 FROM docker.io/debian:bookworm-slim
 WORKDIR /root/
-COPY --from=builder /app/main .
+COPY --from=builder /app/website .
 COPY ./templates/ templates/
 COPY ./assets/ assets/
 
 EXPOSE 8080
 ENV  GIN_MODE=release
 
-CMD ["/app/main"]
+CMD ["/app/website"]
