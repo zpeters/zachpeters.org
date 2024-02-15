@@ -13,4 +13,4 @@ COPY ./assets/ assets/
 EXPOSE 8080
 ENV  GIN_MODE=release
 
-CMD ["/app/website"]
+CMD ["/root/website"]
