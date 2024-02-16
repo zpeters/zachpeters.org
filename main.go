@@ -59,7 +59,7 @@ func main() {
 
 	router.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "home.html", gin.H{
-			"title": "Welcome",
+			"title": "Hello, World!",
 		})
 	})
 
