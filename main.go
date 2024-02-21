@@ -15,25 +15,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func getEstimatedReadingTime(filePath string) (string, int, error) {
-	readingSpeed := 238
-
-	// get some file content
-	content, err := os.ReadFile(filePath)
-	if err != nil {
-		return "", 0, err
-	}
-
-	// estimate reading time
-	text := string(content)
-	wordCount := len(strings.Fields(text))
-	estimatedReadingMinutes := float64(wordCount) / float64(readingSpeed)
-	estimatedTime := time.Duration(estimatedReadingMinutes) * time.Minute
-	humanTime := durafmt.Parse(estimatedTime).String()
-
-	return humanTime, wordCount, nil
-}
-
 func main() {
 	router := gin.Default()
 
