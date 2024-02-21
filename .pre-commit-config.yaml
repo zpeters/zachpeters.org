@@ -1,0 +1,28 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+    -   id: check-added-large-files
+  # Define custom hooks for Go files
+- repo: local
+  hooks:
+    - id: gofmt
+      name: gofmt
+      description: Formats Go code
+      entry: gofmt -w
+      language: system
+      types: [go]
+      files: \.go$
+
+    - id: go-vet
+      name: go vet
+      description: Vet examines Go source code and reports suspicious constructs
+      entry: go vet ./...
+      language: system
+      pass_filenames: false
+      types: [go]
+# golangci-lint: Use the official golangci-lint hook repository
+- repo: https://github.com/golangci/golangci-lint
+  rev: v1.56.2  # Specify the version of golangci-lint you want to use
+  hooks:
+    - id: golangci-lint
