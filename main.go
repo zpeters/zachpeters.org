@@ -16,7 +16,7 @@ import (
 )
 
 func getEstimatedReadingTime(filePath string) (string, int, error) {
-	var readingSpeed = 238
+	readingSpeed := 238
 
 	// get some file content
 	content, err := os.ReadFile(filePath)
