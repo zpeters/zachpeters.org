@@ -1,6 +1,22 @@
 {{template "header.html"}}
 <h2>{{.title}}</h2>
 
-{{template "hardware-bluetooth-radio.html"}}
+<ol>
+  <li><a href="#bluetooth-radio">Bluetooth Radio</a></li>
+  <li><a href="#folder-cam">Folder Cam</a></li>
+  <li><a href="#morse-code-glove">Morse Code Glove</a></li>
+</ol>
+
+<div id="bluetooth-radio">
+  {{template "hardware-bluetooth-radio.html"}}
+</div>
+
+<div id="folder-cam">
+  {{template "hardware-folder-cam.html"}}
+</div>
+
+<div id="morse-code-glove">
+  {{template "hardware-morse-code-glove.html"}}
+</div>
 
 {{template "footer.html"}}

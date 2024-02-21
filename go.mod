@@ -5,7 +5,6 @@ go 1.22
 require (
 	github.com/gin-contrib/gzip v0.0.6
 	github.com/gin-gonic/gin v1.9.1
-	github.com/hako/durafmt v0.0.0-20210608085754-5c1018a4e16b
 )
 
 require (

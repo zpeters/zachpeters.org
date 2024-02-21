@@ -5,12 +5,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"strings"
-	"time"
 
 	"github.com/gin-contrib/gzip"
-	"github.com/hako/durafmt"
 
 	"github.com/gin-gonic/gin"
 )
