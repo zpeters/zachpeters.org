@@ -1,0 +1,77 @@
+<section>
+  <h3>Bluetooth Radio (2017)</h3>
+  <p>
+    In 2017, a good friend was moving from away so we wanted to give her a going-away/
+    housewarming gift for her new place. She always had a flair for mid-century modern
+    so we decided that something with that style would be the perfect gift
+  </p>
+  <p>
+    After some searching around, we found the perfect thing. It was an older
+    clock radio, that had just enough <em>mid-century</em> feel. Now to make
+    it special.
+  <figure>
+    <img src="/assets/img/bluetooth-radio/IMG_20170420_174940.png" alt="outside view of an old radio">
+  </figure>
+  </p>
+  <p>
+    After searching online, i found a few components to start the <em>transformation</em>.
+    Most of the "brains" of this project was the
+    <a
+      href="https://web.archive.org/web/20181031002148/https://www.ebay.com/itm/TDA7492P-50W-50W-CSR8635-Bluetooth-4-0-Audio-Receiver-Digital-Amplifier-Board-/172141677883?oid=322323937478">
+      TDA7492P 50W+50W CSR8635 Bluetooth 4.0 Audio Receiver Digital
+      Amplifier Board</a>. I'm not sure if this particular model is
+    available but there are
+    <a
+      href="https://www.ebay.com/sch/i.html?_from=R40&_nkw=TDA7492P+50W%2B50W+CSR8635+Bluetooth+4.0+Audio+Receiver+Digital+Amplifier+Board&_sacat=0">
+      dozens of similar boards of similar specs</a>. This should cost you around $20.00
+  <figure>
+    <img src="/assets/img/bluetooth-radio/IMG_20170420_175129.png" alt="another view of the bluetooth module">
+  </figure>
+  </p>
+  <p>
+    Construction was relatively simple, my skills are sorely lacking and it maybe
+    took an hour to throw everything together. I disconnected the original power
+    plug from the transformer so that was no longer in use. Then i routed the
+    power plug from the ac adaptor that came with the bluetooth unit out the
+    back. Ideally, I wouldn't want the body of the ac adaptor inside the
+    radio housing, but it is probably safer and produces less heat than the
+    original transformer.
+  <figure>
+    <img src="/assets/img/bluetooth-radio/IMG_20170420_175126.png" alt="the guts and wires of an old radio">
+  </figure>
+  </p>
+  <p>
+    The last piece i needed to figure out was essentially converting a stereo
+    signal to mono. It would seem that you can just hook <em>both</em> left
+    and right channels to the "positive" on the speaker and you'd good to go.
+    Unfortunately, this is not the case. You will notice some of the sound
+    comes through but everything sounds distorted. This is due to the fact
+    that the speaker is trying to reproduce two <em>different</em> signals
+    at the same time.
+  </p>
+
+  <figure>
+    <img src="/assets/img/bluetooth-radio/IMG_20170420_175140.png" alt="rear view of a speaker">
+  </figure>
+
+  <p>
+    Thankfully, this is easy to remedy. With a
+    <a href="https://en.wikipedia.org/wiki/Voltage_divider">
+      voltage divider</a> you can <em>sum</em> the signal, producing a mixed signal.
+    I never ended up writing down the exact components and specifications that
+    I used but you should be able to come up with something by looking up
+    a basic circuit and experimenting with different values.
+  </p>
+</section>
+
+<section>
+  <p>
+    As you can see the <em>finished</em> build looks more or less the same as the
+    original. The other addition was connecting the top button to the pairing
+    circuit of the bluetooth board. I could never figure out its original function
+    but it worked beautifully for my purposes
+  <figure>
+    <img src="/assets/img/bluetooth-radio/IMG_20170420_174945.png" alt="top view of a radio">
+  </figure>
+  </p>
+</section>

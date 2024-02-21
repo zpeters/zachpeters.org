@@ -63,9 +63,15 @@ func main() {
 		})
 	})
 
-	router.GET("/projects", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "projects.html", gin.H{
-			"title": "Projects",
+	router.GET("/software", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "software-projects.html", gin.H{
+			"title": "Software Projects",
+		})
+	})
+
+	router.GET("/hardware", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "hardware-projects.html", gin.H{
+			"title": "Hardware Projects",
 		})
 	})
 
