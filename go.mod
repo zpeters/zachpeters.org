@@ -1,6 +1,6 @@
 module zachpeters.org/website
 
-go 1.22
+go 1.21
 
 require (
 	github.com/gin-contrib/gzip v0.0.6
