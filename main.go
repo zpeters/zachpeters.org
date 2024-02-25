@@ -3,11 +3,14 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/gin-contrib/gzip"
+	"github.com/russross/blackfriday/v2"
 
 	"github.com/gin-gonic/gin"
 )
@@ -56,6 +59,20 @@ func main() {
 	router.GET("/recommendedapps", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "recommendedapps.html", gin.H{
 			"title": "Recommended Applications",
+		})
+	})
+
+	router.GET("/changelog", func(c *gin.Context) {
+		mdContent, err := os.ReadFile("./CHANGELOG.md")
+		if err != nil {
+			_ = c.AbortWithError(http.StatusInternalServerError, err)
+			return
+		}
+		htmlContent := blackfriday.Run(mdContent)
+		safeHtmlContent := template.HTML(htmlContent)
+
+		c.HTML(http.StatusOK, "changelog.html", gin.H{
+			"Content": safeHtmlContent,
 		})
 	})
 

@@ -6,6 +6,9 @@ run: build
   # Run your application locally
   ./bin/website
 
+dev:
+  fd . --exclude bin/ --exclude tmp/ | entr -r go run main.go
+
 lint:
   # Lint your Go codebase
   golangci-lint run ./...
