@@ -23,3 +23,6 @@ deploy:
   ssh podman "systemctl stop zachpeters"
   ssh podman "systemctl start zachpeters"
   ssh podman "if systemctl is-active --quiet zachpeters; then echo -e '\033[32mOK: Service started successfully\033[0m'; else echo -e '\033[31mFAIL: Service failed to start\033[0m'; fi"
+
+changelog:
+  git cliff > CHANGELOG.md    
