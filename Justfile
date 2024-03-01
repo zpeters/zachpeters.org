@@ -12,6 +12,7 @@ dev:
 lint:
   # Lint your Go codebase
   golangci-lint run ./...
+  gofmt -l .
 
 deploy:
   # Build the container with podman
