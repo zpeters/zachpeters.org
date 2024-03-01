@@ -4,8 +4,13 @@
 <ol>
   <li><a href="#bruno">Bruno</a></li>
   <li><a href="#helix">Helix</a></li>
+  <li><a href="">Home Manager (Coming Soon)</a></li>
   <li><a href="#logseq">Logseq</a></li>
   <li><a href="#nixshell">Nix-Shell</a></li>
+  <li><a href="">Rectangle (Coming Soon)</a></li>
+  <li><a href="#vhs">VHS</a></li>
+  <li><a href="">Zellij (Coming Soon)</a></li>
+  <li><a href="">Zoxide (Coming Soon)</a></li>
 </ol>
 
 <article>
@@ -49,7 +54,7 @@
     </p>
 
 
-    <h3 id="logseq">Logseq</h3>
+ <h3 id="logseq">Logseq</h3>
     <p>
       It's hard for me to classify <a href="https://logseq.com/">Logseq</a>. In
       many ways its a very simple application - you edit markdown files. With
@@ -79,10 +84,38 @@
       strengths and power of logseq.
     </p>
 
-    <h3 id="nixshell">Nix-Shell</h3>
+    <h3 id="vhs">VHS</h3>
     <p>
-      <a href="https://nix.dev/tutorials/first-steps/declarative-shell.html">nix-shell</a>
-      <em>coming soon</em>
+      As you can see from the demo below, <a href="https://github.com/charmbracelet/vhs?tab=readme-ov-file#vhs-command-reference">VHS</a> is a 
+      <em>screen recorder for the terminal</em>.  For terminal based apps
+      a lot of time a text description is great, but a screencast is really
+      great for showing off how commands can work together and for showing off
+      tui apps.  There is another app called <a href="https://asciinema.org/">
+      asciinema</a> but I
+      enjoy this a little more.
+      <figure>
+        <img src="/assets/img/vhs.gif" alt="animated gif of working in helix to edit a webpage">
+      </figure>
+    </p>
+    <p>
+      There are some more advanced commands, but this is what i normally use:
+      <code>vhs record > my_recording.tape</code> start hacking and exit when you are done
+      <code>vhs my_recording.tape</code> this renders the actions to a gif
+      <label for="gifsicle" class="margin-toggle sidenote-number"></label>
+      <input type="checkbox" id="gifsicle" class="margin-toggle" />
+      <span class="sidenote">
+        Bonus tip to reduce the size of the gif:   
+          <code>
+             gifsicle --run "gifsicle --resize-width 300 --colors 256 out.gif > resized.gif"
+          </code>
+      </span>
+    </p>
+    <p>
+      The other thing i find really cool is that the <a href="/assets/vhs-demo.tape"><em>tape</em></a>
+       file is just a <a href="https://github.com/charmbracelet/vhs?tab=readme-ov-file#set-theme">
+      text file with some markup and commands</a>.  
+      That means that you can manually edit it and re-render it at any point, there are even 
+      <a href="https://github.com/charmbracelet/vhs?tab=readme-ov-file#set-theme">themes</a>!
     </p>
   </section>
 </article>
