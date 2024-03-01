@@ -9,7 +9,6 @@ WORKDIR /root/
 COPY --from=builder /app/website .
 COPY ./templates/ templates/
 COPY ./assets/ assets/
-COPY ./CHANGELOG.md CHANGELOG.md
 
 EXPOSE 8080
 ENV  GIN_MODE=release
