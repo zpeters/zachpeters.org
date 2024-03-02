@@ -1,6 +1,6 @@
 FROM docker.io/golang:1.22 as builder
 WORKDIR /app
-COPY go.mod go.sum main.go ./
+COPY go.mod go.sum main.go blog.go ./
 RUN go mod download
 RUN go build  .
 
