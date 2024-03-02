@@ -1,0 +1,12 @@
+{{template "header.html"}}
+
+<h2>{{.title}}</h2>
+<h3>{{.date.Format "January 2, 2006" }}</h3>
+
+<article>
+  <section>
+    {{.content }}
+  </section>
+</article>
+
+{{template "footer.html"}}

@@ -3,11 +3,13 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"strings"
 
 	"github.com/gin-contrib/gzip"
+	"github.com/russross/blackfriday/v2"
 
 	"github.com/gin-gonic/gin"
 )
@@ -31,6 +33,11 @@ func main() {
 
 	router.LoadHTMLGlob("templates/**/*")
 
+	blogPosts, err := LoadBlogPosts("templates/blog/")
+	if err != nil {
+		panic(err)
+	}
+
 	router.NoRoute(func(c *gin.Context) {
 		c.HTML(http.StatusNotFound, "404.html", gin.H{})
 	})
@@ -42,9 +49,43 @@ func main() {
 	})
 
 	router.GET("/blog", func(c *gin.Context) {
+		blogPosts, err := LoadBlogPosts("templates/blog/")
+		if err != nil {
+			log.Printf("Could not load blog post list: %v", err)
+			c.HTML(http.StatusInternalServerError, "error.html", gin.H{"message": "Could not load blog posts."})
+			return
+		}
+
 		c.HTML(http.StatusOK, "blog.html", gin.H{
-			"title": "Blog",
+			"title": "Blog Posts",
+			"posts": blogPosts,
 		})
+	})
+
+	router.GET("/blog/:url", func(c *gin.Context) {
+		postUrl := c.Param("url")
+
+		var foundPost *BlogPost
+
+		for _, post := range blogPosts {
+			if post.URL == postUrl {
+				foundPost = &post
+				break
+			}
+		}
+
+		if foundPost != nil {
+			output := blackfriday.Run([]byte(foundPost.Content))
+			foundPost.Content = string(output)
+
+			c.HTML(http.StatusOK, "blog-post.html", gin.H{
+				"title":   foundPost.Title,
+				"date":    foundPost.Date,
+				"content": template.HTML(foundPost.Content),
+			})
+		} else {
+			c.HTML(http.StatusNotFound, "404.html", gin.H{})
+		}
 	})
 
 	router.GET("/software", func(c *gin.Context) {
