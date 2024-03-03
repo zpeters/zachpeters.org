@@ -2,7 +2,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -21,7 +20,6 @@ func main() {
 
 	// Set cache control for static assets
 	router.Use(func(c *gin.Context) {
-		fmt.Println(c.Request.URL.Path)
 		if strings.HasPrefix(c.Request.URL.Path, "/assets/") {
 			c.Header("Cache-Control", "private, max-age=86400")
 		}

@@ -65,15 +65,12 @@ func parseFilename(filename string) (time.Time, string, error) {
 	}
 
 	dateTimeString := string(base[:underscoreIndex])
-	log.Println(dateTimeString)
 	title := strings.ReplaceAll(base[underscoreIndex+1:], "-", " ")
-	log.Println(title)
 
 	date, err := time.Parse("2006-01-02T15:04:05-0700", dateTimeString)
 	if err != nil {
 		return time.Time{}, "", fmt.Errorf("error parsing datetime from filename: %v", err)
 	}
-	log.Println(date)
 
 	return date, title, nil
 }
