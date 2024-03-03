@@ -11,10 +11,11 @@ import (
 )
 
 type BlogPost struct {
-	Date    time.Time
-	Title   string
-	URL     string
-	Content string // You might load this only when needed
+	Date          time.Time
+	FormattedDate string
+	Title         string
+	URL           string
+	Content       string // You might load this only when needed
 }
 
 func LoadBlogPosts(postsDir string) ([]BlogPost, error) {
@@ -40,10 +41,11 @@ func LoadBlogPosts(postsDir string) ([]BlogPost, error) {
 		content := string(contentBytes)
 
 		posts = append(posts, BlogPost{
-			Date:    date,
-			Title:   title,
-			URL:     strings.ToLower(strings.ReplaceAll(title, " ", "-")),
-			Content: content,
+			Date:          date,
+			FormattedDate: FormatDate(date),
+			Title:         title,
+			URL:           strings.ToLower(strings.ReplaceAll(title, " ", "-")),
+			Content:       content,
 		})
 
 		sort.Slice(posts, func(i, j int) bool {
@@ -57,19 +59,27 @@ func LoadBlogPosts(postsDir string) ([]BlogPost, error) {
 func parseFilename(filename string) (time.Time, string, error) {
 	base := strings.TrimSuffix(filepath.Base(filename), filepath.Ext(filename))
 
-	parts := strings.SplitN(base, "-", 4)
-	if len(parts) < 4 {
-		return time.Time{}, "", fmt.Errorf("filename does not match expected format: YYYY-MM-DD-title")
+	underscoreIndex := strings.LastIndex(base, "_")
+	if underscoreIndex == -1 {
+		return time.Time{}, "", fmt.Errorf("filename does not contain a title part")
 	}
 
-	dateString := strings.Join(parts[:3], "-")
-	date, err := time.Parse("2006-01-02", dateString)
+	dateTimeString := string(base[:underscoreIndex])
+	log.Println(dateTimeString)
+	title := strings.ReplaceAll(base[underscoreIndex+1:], "-", " ")
+	log.Println(title)
+
+	date, err := time.Parse("2006-01-02T15:04:05-0700", dateTimeString)
 	if err != nil {
-		return time.Time{}, "", err
+		return time.Time{}, "", fmt.Errorf("error parsing datetime from filename: %v", err)
 	}
-
-	title := strings.Join(parts[3:], "-")
-	title = strings.Replace(title, "-", " ", -1)
+	log.Println(date)
 
 	return date, title, nil
+}
+
+func FormatDate(t time.Time) string {
+	baseFormat := t.Format("Monday, Jan 2, 2006")
+	timeFormat := t.Format("at 03:04PM")
+	return fmt.Sprintf("%s %s", baseFormat, timeFormat)
 }
