@@ -16,11 +16,11 @@ lint:
   golangci-lint run ./...
 
 
-deploy:
-  # Build the container with podman
+build-image:
   podman build --platform linux/amd64 -t podman:5000/zachpeters.org:latest .
-  # Push the container image
   podman push podman:5000/zachpeters.org:latest
+
+deploy: build-image
   # Remote commands to update the service
   ssh root@podman "podman auto-update"
   ssh root@podman "systemctl stop zachpeters"

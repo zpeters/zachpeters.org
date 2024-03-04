@@ -7,6 +7,6 @@ pkgs.mkShell {
     pkgs.go
     pkgs.golangci-lint
     pkgs.just 
-    #pkgs.podman
+    pkgs.podman
   ];
 }
