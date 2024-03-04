@@ -7,7 +7,7 @@ run: build
   ./bin/website
 
 dev:
-  fd . --exclude bin/ --exclude tmp/ | entr -r go run main.go
+  fd . --exclude bin/ --exclude tmp/ | entr -r go run .
 
 lint:
   # Lint your Go codebase
@@ -22,10 +22,7 @@ deploy:
   # Push the container image
   podman push podman:5000/zachpeters.org:latest
   # Remote commands to update the service
-  ssh podman "podman auto-update"
-  ssh podman "systemctl stop zachpeters"
-  ssh podman "systemctl start zachpeters"
-  ssh podman "if systemctl is-active --quiet zachpeters; then echo -e '\033[32mOK: Service started successfully\033[0m'; else echo -e '\033[31mFAIL: Service failed to start\033[0m'; fi"
-
-changelog:
-  git cliff > CHANGELOG.md    
+  ssh root@podman "podman auto-update"
+  ssh root@podman "systemctl stop zachpeters"
+  ssh root@podman "systemctl start zachpeters"
+  ssh root@podman "if systemctl is-active --quiet zachpeters; then echo -e '\033[32mOK: Service started successfully\033[0m'; else echo -e '\033[31mFAIL: Service failed to start\033[0m'; fi"
