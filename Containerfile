@@ -9,6 +9,7 @@ WORKDIR /root/
 COPY --from=builder /app/website .
 COPY ./templates/ templates/
 COPY ./assets/ assets/
+COPY ./blog/ blog/
 
 EXPOSE 8080
 ENV  GIN_MODE=release
