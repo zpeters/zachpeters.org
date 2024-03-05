@@ -31,7 +31,7 @@ func main() {
 
 	router.LoadHTMLGlob("templates/**/*")
 
-	blogPosts, err := LoadBlogPosts("templates/blog/")
+	blogPosts, err := LoadBlogPosts("blog/")
 	if err != nil {
 		panic(err)
 	}
@@ -47,7 +47,6 @@ func main() {
 	})
 
 	router.GET("/blog", func(c *gin.Context) {
-		blogPosts, err := LoadBlogPosts("templates/blog/")
 		if err != nil {
 			log.Printf("Could not load blog post list: %v", err)
 			c.HTML(http.StatusInternalServerError, "error.html", gin.H{"message": "Could not load blog posts."})
