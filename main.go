@@ -109,5 +109,16 @@ func main() {
 		})
 	})
 
+	router.GET("/rss", func(c *gin.Context) {
+		rss, err := GenerateRssFeed(blogPosts)
+		if err != nil {
+			log.Printf("Could not load rss feed: %v", err)
+			c.HTML(http.StatusInternalServerError, "error.html", gin.H{"message": "Could not load rss feed."})
+			return
+		}
+		c.Writer.Header().Set("Content-Type", "application/rss+xml")
+		c.String(http.StatusOK, rss)
+	})
+
 	log.Fatalln(router.Run(":8080"))
 }

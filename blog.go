@@ -8,6 +8,8 @@ import (
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/gorilla/feeds"
 )
 
 type BlogPost struct {
@@ -54,6 +56,34 @@ func LoadBlogPosts(postsDir string) ([]BlogPost, error) {
 	}
 
 	return posts, nil
+}
+
+func GenerateRssFeed(posts []BlogPost) (string, error) {
+	feed := &feeds.Feed{
+		Title:       "Zach Peters Website",
+		Link:        &feeds.Link{Href: "https://zachpeters.org"},
+		Description: "A personal website",
+		Author: &feeds.Author{
+			Name:  "Zach Peters",
+			Email: "zpeters@gmail.com",
+		},
+		Created: time.Now(),
+	}
+
+	for _, post := range posts {
+		feed.Items = append(feed.Items, &feeds.Item{
+			Title: post.Title,
+			Link:  &feeds.Link{Href: "https://zachpeters.org/blog/" + post.URL},
+			Author: &feeds.Author{
+				Name:  "Zach Peters",
+				Email: "zpeters@gmail.com",
+			},
+			Created: post.Date,
+			Content: post.Content,
+		})
+	}
+
+	return feed.ToRss()
 }
 
 func parseFilename(filename string) (time.Time, string, error) {
