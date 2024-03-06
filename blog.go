@@ -9,7 +9,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/aquilax/truncate"
 	"github.com/gorilla/feeds"
+	"github.com/microcosm-cc/bluemonday"
 )
 
 type BlogPost struct {
@@ -17,7 +19,7 @@ type BlogPost struct {
 	FormattedDate string
 	Title         string
 	URL           string
-	Content       string // You might load this only when needed
+	Content       string
 }
 
 func LoadBlogPosts(postsDir string) ([]BlogPost, error) {
@@ -71,6 +73,8 @@ func GenerateRssFeed(posts []BlogPost) (string, error) {
 	}
 
 	for _, post := range posts {
+		p := bluemonday.StripTagsPolicy()
+		strippedHtml := p.Sanitize(post.Content)
 		feed.Items = append(feed.Items, &feeds.Item{
 			Title: post.Title,
 			Link:  &feeds.Link{Href: "https://zachpeters.org/blog/" + post.URL},
@@ -78,8 +82,8 @@ func GenerateRssFeed(posts []BlogPost) (string, error) {
 				Name:  "Zach Peters",
 				Email: "zpeters@gmail.com",
 			},
-			Created: post.Date,
-			Content: post.Content,
+			Created:     post.Date,
+			Description: truncate.Truncate(strippedHtml, 256, "...", truncate.PositionEnd),
 		})
 	}
 
