@@ -17,12 +17,6 @@ lint:
 
 
 build-image:
-  podman build --platform linux/amd64 -t podman:5000/zachpeters.org:latest .
-  podman push podman:5000/zachpeters.org:latest
+  podman build --platform linux/arm64 -t registry.home.zach:5000/zachpeters.org:latest .
+  podman push registry.home.zach:5000/zachpeters.org:latest
 
-deploy: build-image
-  # Remote commands to update the service
-  ssh root@podman "podman auto-update"
-  ssh root@podman "systemctl stop zachpeters"
-  ssh root@podman "systemctl start zachpeters"
-  ssh root@podman "if systemctl is-active --quiet zachpeters; then echo -e '\033[32mOK: Service started successfully\033[0m'; else echo -e '\033[31mFAIL: Service failed to start\033[0m'; fi"
