@@ -17,6 +17,5 @@ lint:
 
 
 build-image:
-  # podman build --platform linux/arm64 -t registry.home.zach:5000/zachpeters.org:latest .
-  podman build -t registry.home.zach:5000/zachpeters.org:latest .
-  podman push registry.home.zach:5000/zachpeters.org:latest
+  podman build -t registry.zachpeters.org/zachpeters.org:latest .
+  podman push registry.zachpeters.org/zachpeters.org:latest
