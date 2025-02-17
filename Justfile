@@ -16,6 +16,6 @@ lint:
   golangci-lint run ./...
 
 
-build-image:
-  podman build -t registry.zachpeters.org/zachpeters.org:latest .
-  podman push registry.zachpeters.org/zachpeters.org:latest
+deploy:
+  podman build -t registry.home.zach/zachpeters.org:latest .
+  podman push registry.home.zach/zachpeters.org:latest
