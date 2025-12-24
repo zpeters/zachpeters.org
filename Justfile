@@ -17,5 +17,5 @@ lint:
 
 
 deploy:
-  podman build -t registry.home.zach/zachpeters.org:0.1.1 .
-  podman push registry.home.zach/zachpeters.org:0.1.1
+  podman build --isolation=chroot -t registry.home.zach/zachpeters.org:0.1.1 .
+  podman push --tls-verify=false registry.home.zach/zachpeters.org:0.1.1

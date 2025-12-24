@@ -5,7 +5,11 @@
       "Bash(find:*)",
       "Bash(go build:*)",
       "Bash(gofmt:*)",
-      "Bash(go vet:*)"
+      "Bash(go vet:*)",
+      "Bash(just deploy:*)",
+      "Bash(podman info:*)",
+      "Bash(podman build --help:*)",
+      "Bash(podman build:*)"
     ]
   }
 }
