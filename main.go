@@ -41,8 +41,15 @@ func main() {
 	})
 
 	router.GET("/", func(c *gin.Context) {
+		// Get recent posts (limit to 5)
+		recentPosts := blogPosts
+		if len(recentPosts) > 5 {
+			recentPosts = recentPosts[:5]
+		}
+
 		c.HTML(http.StatusOK, "home.html", gin.H{
-			"title": "Hello, World!",
+			"title":       "Hello, World!",
+			"recentPosts": recentPosts,
 		})
 	})
 
@@ -94,18 +101,6 @@ func main() {
 	router.GET("/hardware", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "hardware-projects.html", gin.H{
 			"title": "Hardware Projects",
-		})
-	})
-
-	router.GET("/recommendedapps", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "recommendedapps.html", gin.H{
-			"title": "Recommended Applications",
-		})
-	})
-
-	router.GET("/articles", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "articles.html", gin.H{
-			"title": "Favorite Articles",
 		})
 	})
 

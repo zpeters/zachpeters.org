@@ -2,12 +2,37 @@
 <h2>{{.title}}</h2>
 
 <section>
+  <h3>About</h3>
   <p>
-    <span class="newthought">This website tracks some</span> of my
-    interests and hobbies. The <a href="/software">Software page</a> has
-    descriptions and some code for different projects I've been working on.
-    <a href="/hardware">Hardware Projects</a> had different gadgets that I've
-    built.
+    <span class="newthought">I'm a software engineer</span> who writes code,
+    builds systems, and explores how technology works. I'm particularly interested
+    in low-level systems, developer tooling, and the craft of building things that
+    last. I write here to document what I learn, share what works (and what doesn't),
+    and occasionally think out loud about the technical challenges I encounter.
+  </p>
+</section>
+
+{{if .recentPosts}}
+<section>
+  <h3>Recent Writing</h3>
+  <ul>
+    {{range .recentPosts}}
+      <li>
+        <a href="/blog/{{.URL}}">{{.Title}}</a>
+        <span style="color: #666; font-size: 0.9em;"> — {{.FormattedDate}}</span>
+      </li>
+    {{end}}
+  </ul>
+  <p><a href="/blog">View all posts →</a></p>
+</section>
+{{end}}
+
+<section>
+  <h3>Projects & Contact</h3>
+  <p>
+    The <a href="/software">Software page</a> has descriptions and code for
+    different projects I've been working on. <a href="/hardware">Hardware Projects</a>
+    showcases different gadgets that I've built.
   </p>
   <p>
     For a look into my background, you can review
@@ -18,8 +43,8 @@
   </p>
   <p>
     I have a lot of hobbies and interests outside of technical things. A
-    few of my recent interests have been leather working, watching-making and
-    reading (well mostly collection) books. I have slowly been building up
+    few of my recent interests have been leather working, watch-making and
+    reading (well mostly collecting) books. I have slowly been building up
     my collection of vinyl records.
   </p>
 </section>
