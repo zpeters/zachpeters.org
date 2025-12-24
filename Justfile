@@ -17,5 +17,5 @@ lint:
 
 
 deploy:
-  podman build -t registry.home.zach/zachpeters.org:0.1.0 .
-  podman push registry.home.zach/zachpeters.org:0.1.0
+  podman build -t registry.home.zach/zachpeters.org:0.1.1 .
+  podman push registry.home.zach/zachpeters.org:0.1.1
