@@ -23,8 +23,6 @@ import (
 	"fmt"
 	"reflect"
 	"runtime"
-
-	. "github.com/cloudwego/iasm/x86_64"
 )
 
 func ReservedRegs(callc bool) []Register {

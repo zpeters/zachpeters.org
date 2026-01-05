@@ -21,7 +21,31 @@ import (
 	"reflect"
 	"unsafe"
 
-	. "github.com/cloudwego/iasm/x86_64"
+	x64 "github.com/bytedance/sonic/loader/internal/iasm/x86_64"
+)
+
+type (
+	Register      = x64.Register
+	Register64    = x64.Register64
+	XMMRegister   = x64.XMMRegister
+	Program       = x64.Program
+	MemoryOperand = x64.MemoryOperand
+	Label         = x64.Label
+)
+
+var (
+	Ptr         = x64.Ptr
+	DefaultArch = x64.DefaultArch
+	CreateLabel = x64.CreateLabel
+)
+
+const (
+	RAX = x64.RAX
+	RSP = x64.RSP
+	RBP = x64.RBP
+	R12 = x64.R12
+	R14 = x64.R14
+	R15 = x64.R15
 )
 
 const (
@@ -30,23 +54,23 @@ const (
 )
 
 var iregOrderC = []Register{
-	RDI,
-	RSI,
-	RDX,
-	RCX,
-	R8,
-	R9,
+	x64.RDI,
+	x64.RSI,
+	x64.RDX,
+	x64.RCX,
+	x64.R8,
+	x64.R9,
 }
 
 var xregOrderC = []Register{
-	XMM0,
-	XMM1,
-	XMM2,
-	XMM3,
-	XMM4,
-	XMM5,
-	XMM6,
-	XMM7,
+	x64.XMM0,
+	x64.XMM1,
+	x64.XMM2,
+	x64.XMM3,
+	x64.XMM4,
+	x64.XMM5,
+	x64.XMM6,
+	x64.XMM7,
 }
 
 var (
@@ -274,8 +298,4 @@ func CallC(addr uintptr, fr Frame, maxStack uintptr) []byte {
 	fr.emitGrowStack(p, entry)
 
 	return p.Assemble(0)
-}
-
-func (self *Frame) emitDebug(p *Program) {
-	p.INT(3)
 }

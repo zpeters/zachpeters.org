@@ -29,7 +29,7 @@ import (
 	"fmt"
 	"reflect"
 
-	. "github.com/cloudwego/iasm/x86_64"
+	x64 "github.com/bytedance/sonic/loader/internal/iasm/x86_64"
 )
 
 /** Frame Structure of the Generated Function
@@ -59,36 +59,36 @@ offs()  -------------------------------|
     RSP -------------------------------|↓ lower addresses
 */
 
-const zeroRegGo = XMM15
+const zeroRegGo = x64.XMM15
 
 var iregOrderGo = [...]Register64{
-	RAX, // RDI
-	RBX, // RSI
-	RCX, // RDX
-	RDI, // RCX
-	RSI, // R8
-	R8,  // R9
-	R9,
-	R10,
-	R11,
+	x64.RAX, // RDI
+	x64.RBX, // RSI
+	x64.RCX, // RDX
+	x64.RDI, // RCX
+	x64.RSI, // R8
+	x64.R8,  // R9
+	x64.R9,
+	x64.R10,
+	x64.R11,
 }
 
 var xregOrderGo = [...]XMMRegister{
-	XMM0,
-	XMM1,
-	XMM2,
-	XMM3,
-	XMM4,
-	XMM5,
-	XMM6,
-	XMM7,
-	XMM8,
-	XMM9,
-	XMM10,
-	XMM11,
-	XMM12,
-	XMM13,
-	XMM14,
+	x64.XMM0,
+	x64.XMM1,
+	x64.XMM2,
+	x64.XMM3,
+	x64.XMM4,
+	x64.XMM5,
+	x64.XMM6,
+	x64.XMM7,
+	x64.XMM8,
+	x64.XMM9,
+	x64.XMM10,
+	x64.XMM11,
+	x64.XMM12,
+	x64.XMM13,
+	x64.XMM14,
 }
 
 func ReservedRegs(callc bool) []Register {
@@ -258,7 +258,7 @@ func (self *Frame) emitExchangeArgs(p *Program) {
 				iregArgs = append(iregArgs, v)
 			}
 		} else {
-			panic("not support stack-assgined arguments now")
+			panic("not support stack-assigned arguments now")
 		}
 	}
 	if xregArgs > len(xregOrderC) {

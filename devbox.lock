@@ -281,6 +281,70 @@
         }
       }
     },
+    "mitmproxy@latest": {
+      "last_modified": "2025-12-21T10:48:17Z",
+      "resolved": "github:NixOS/nixpkgs/306ea70f9eb0fb4e040f8540e2deab32ed7e2055#mitmproxy",
+      "source": "devbox-search",
+      "version": "12.2.1",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/b1a87bdr62fmdszp18nz12prsbm157ih-python3.13-mitmproxy-12.2.1",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/3g9nvm9zs8kbrqqkr489msqh0igf5fy3-python3.13-mitmproxy-12.2.1-dist"
+            }
+          ],
+          "store_path": "/nix/store/b1a87bdr62fmdszp18nz12prsbm157ih-python3.13-mitmproxy-12.2.1"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/532hnsndyyvbpxp6576jq7nirrq743jx-python3.13-mitmproxy-12.2.1",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/i22r9x93cmnzm5jr7kb9b5cywpsxwaab-python3.13-mitmproxy-12.2.1-dist"
+            }
+          ],
+          "store_path": "/nix/store/532hnsndyyvbpxp6576jq7nirrq743jx-python3.13-mitmproxy-12.2.1"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/x2mpvr38nkfypk5v87hn9k7qzz2z0i7x-python3.13-mitmproxy-12.2.1",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/8hpwfdq1785a3ac8jpbzk4kjbazj24yf-python3.13-mitmproxy-12.2.1-dist"
+            }
+          ],
+          "store_path": "/nix/store/x2mpvr38nkfypk5v87hn9k7qzz2z0i7x-python3.13-mitmproxy-12.2.1"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/cvxkiyvd6smdpvwjql30aqdakq9cl4kv-python3.13-mitmproxy-12.2.1",
+              "default": true
+            },
+            {
+              "name": "dist",
+              "path": "/nix/store/n4arp9zsibfg4m0na89jws57wni63g0l-python3.13-mitmproxy-12.2.1-dist"
+            }
+          ],
+          "store_path": "/nix/store/cvxkiyvd6smdpvwjql30aqdakq9cl4kv-python3.13-mitmproxy-12.2.1"
+        }
+      }
+    },
     "podman@latest": {
       "last_modified": "2025-09-21T00:54:27Z",
       "resolved": "github:NixOS/nixpkgs/51c8f9cfaae8306d135095bcdb3df9027f95542d#podman",

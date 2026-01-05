@@ -1,5 +1,4 @@
-//go:build go1.16 && !go1.21
-// +build go1.16,!go1.21
+// +build go1.17,!go1.21
 
 /*
  * Copyright 2021 ByteDance Inc.
@@ -20,7 +19,7 @@
 package rt
 
 import (
-	_ "unsafe"
+    _ `unsafe`
 )
 
 //go:linkname GcWriteBarrierAX runtime.gcWriteBarrier

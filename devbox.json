@@ -6,7 +6,8 @@
     "go@latest",
     "golangci-lint@latest",
     "just@latest",
-    "podman@latest"
+    "podman@latest",
+    "mitmproxy@latest"
   ],
   "shell": {
     "init_hook": [
