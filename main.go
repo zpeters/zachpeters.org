@@ -48,7 +48,6 @@ func main() {
 
 		c.HTML(http.StatusOK, "home.html", gin.H{
 			"section":     "home",
-			"title":       "Hello, World!",
 			"recentPosts": recentPosts,
 		})
 	})
@@ -62,7 +61,6 @@ func main() {
 
 		c.HTML(http.StatusOK, "blog.html", gin.H{
 			"section": "blog",
-			"title":   "Blog Posts",
 			"posts":   blogPosts,
 		})
 	})
@@ -97,14 +95,12 @@ func main() {
 	router.GET("/software", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "software-projects.html", gin.H{
 			"section": "software",
-			"title":   "Software Projects",
 		})
 	})
 
 	router.GET("/hardware", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "hardware-projects.html", gin.H{
 			"section": "hardware",
-			"title":   "Hardware Projects",
 		})
 	})
 
