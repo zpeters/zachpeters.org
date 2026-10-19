@@ -10,9 +10,15 @@ import (
 // RenderMarkdown renders a blog post. Markdown footnotes ("text[^1]" and
 // "[^1]: note") become Tufte CSS sidenotes.
 func RenderMarkdown(src []byte) []byte {
+	return renderMarkdown(src, "sn-")
+}
+
+// renderMarkdown is RenderMarkdown with the sidenote ids starting with
+// idPrefix, for pages that show more than one rendered document.
+func renderMarkdown(src []byte, idPrefix string) []byte {
 	r := &sidenoteRenderer{blackfriday.NewHTMLRenderer(blackfriday.HTMLRendererParameters{
 		Flags: blackfriday.CommonHTMLFlags,
-	})}
+	}), idPrefix}
 	return blackfriday.Run(src,
 		blackfriday.WithRenderer(r),
 		blackfriday.WithExtensions(blackfriday.CommonExtensions|blackfriday.Footnotes))
@@ -22,6 +28,7 @@ func RenderMarkdown(src []byte) []byte {
 // sidenote markup Tufte CSS expects, and drops the footnote list.
 type sidenoteRenderer struct {
 	*blackfriday.HTMLRenderer
+	idPrefix string
 }
 
 func (r *sidenoteRenderer) RenderNode(w io.Writer, node *blackfriday.Node, entering bool) blackfriday.WalkStatus {
@@ -30,7 +37,7 @@ func (r *sidenoteRenderer) RenderNode(w io.Writer, node *blackfriday.Node, enter
 		return blackfriday.SkipChildren
 	case node.Type == blackfriday.Link && node.NoteID != 0:
 		if entering {
-			id := fmt.Sprintf("sn-%d", node.NoteID)
+			id := fmt.Sprintf("%s%d", r.idPrefix, node.NoteID)
 			_, _ = fmt.Fprintf(w, `<label for="%s" class="margin-toggle sidenote-number"></label>`+
 				`<input type="checkbox" id="%s" class="margin-toggle"/><span class="sidenote">`, id, id)
 			r.renderNote(w, node.Footnote)

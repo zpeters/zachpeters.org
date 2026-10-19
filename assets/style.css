@@ -337,7 +337,8 @@ main > article,
 }
 
 .post-date,
-.list-date {
+.list-date,
+.read-source {
   position: absolute;
   left: calc(var(--text-width) * 1.1);
   width: 24rem;
@@ -362,9 +363,15 @@ main > article,
   margin-top: 0.4rem;
 }
 
+/* Author, year and archive link beside the first line of the notes */
+.read-source {
+  margin: 0;
+}
+
 @media (max-width: 760px) {
   .post-date,
-  .list-date {
+  .list-date,
+  .read-source {
     position: static;
     display: block;
   }

@@ -13,6 +13,7 @@ COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY ./templates/ templates/
 COPY ./assets/ assets/
 COPY ./blog/ blog/
+COPY ./reads/ reads/
 
 EXPOSE 8080
 ENV  GIN_MODE=release

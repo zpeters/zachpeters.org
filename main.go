@@ -39,6 +39,11 @@ func main() {
 		panic(err)
 	}
 
+	reads, err := LoadReads("reads/")
+	if err != nil {
+		panic(err)
+	}
+
 	router.NoRoute(func(c *gin.Context) {
 		c.HTML(http.StatusNotFound, "404.html", gin.H{})
 	})
@@ -121,6 +126,15 @@ func main() {
 			"section":  "hardware",
 			"title":    "Hardware",
 			"timeline": timeline,
+		})
+	})
+
+	router.GET("/reads", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "reads.html", gin.H{
+			"section":  "reads",
+			"title":    "Reads",
+			"reads":    reads,
+			"timeline": NewReadTimeline(reads, time.Now()),
 		})
 	})
 

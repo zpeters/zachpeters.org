@@ -226,6 +226,39 @@ Each hardware project has its own file, which the Hardware page includes.
 The included file name is the template name, so the file does not need a
 `{{define}}` line.
 
+## Reads
+
+The Reads page (`/reads`) lists articles by other people that you
+recommend. Put one markdown file per article in `reads/`:
+
+```markdown
+---
+title: Choose Boring Technology
+author: Dan McKinley
+year: 2015
+url: https://mcfunley.com/choose-boring-technology
+archive: http://archive.today/2024.01.04-012806/https://mcfunley.com/choose-boring-technology
+added: 2026-10-19
+---
+
+Why you like it, in a few sentences. Sidenotes[^1] work as in blog posts.
+
+[^1]: Like this one.
+```
+
+- **Filename:** short, lowercase, words joined by `-`, for example
+  `choose-boring-technology.md`. It is the anchor on the page
+  (`/reads#choose-boring-technology`).
+- **`title`, `url`, `added`:** necessary. `added` is the date you added it
+  (`YYYY-MM-DD`). The page shows the newest first.
+- **`author`, `year`, `archive`:** optional. They show in the margin.
+  `year` is when the article was written. It also puts the read on the
+  chart at the top of the page; a read without a `year` is not on it.
+
+The site reads these files when it starts, so a new read appears after a
+restart or a deploy. If a file has an error, the site does not start, and
+the log names the file.
+
 ## Other parts of the page
 
 - **Sparkline** (top right): your GitHub contributions per week for the

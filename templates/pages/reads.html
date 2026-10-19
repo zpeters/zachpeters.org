@@ -1,0 +1,28 @@
+{{template "header.html" .}}
+
+{{template "project-timeline.html" .timeline}}
+
+<section>
+  <p>
+    <span class="newthought">Articles by other people</span> that I come back
+    to. Each title links to the original; the archived copy is there in case
+    the original goes away.
+  </p>
+</section>
+
+{{range .reads}}
+<section id="{{.ID}}">
+  <h3><a href="{{.URL}}">{{.Title}}</a></h3>
+  <p class="read-source">
+    {{- with .Author}}{{.}}{{end}}{{with .Year}}, {{.}}{{end}}
+    {{- with .Archive}}<br><a href="{{.}}">Archived copy</a>{{end -}}
+  </p>
+  {{.Notes}}
+</section>
+{{else}}
+<section>
+  <p>Nothing yet...</p>
+</section>
+{{end}}
+
+{{template "footer.html"}}

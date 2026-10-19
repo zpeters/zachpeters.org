@@ -1,14 +1,15 @@
 {{define "project-timeline.html"}}
-{{/* Projects by year, built from the page's project headings (see
-     projects.go). Called with a *ProjectTimeline. */}}
+{{/* Projects (or reads) by year, built from the page's project headings
+     (see projects.go) or the reads/ files (see reads.go). Called with a
+     *ProjectTimeline. */}}
 {{with .}}
 {{$t := .}}
 <figure class="lead-figure">
   <label for="mn-projects" class="margin-toggle">&#8853;</label>
   <input type="checkbox" id="mn-projects" class="margin-toggle" />
-  <span class="marginnote">Projects by year. A line that runs to <em>now</em> is still active; a dot alone is a single year. Each name links to its section below.</span>
+  <span class="marginnote">{{.Caption}}</span>
   <svg class="timeline" viewBox="0 0 560 {{.Height}}" role="img" aria-labelledby="pt-title">
-    <title id="pt-title">Projects by year</title>
+    <title id="pt-title">{{.Title}}</title>
     {{range .Rows}}
     <a href="#{{.ID}}">
       <title>{{.Name}}: {{.Years}}</title>

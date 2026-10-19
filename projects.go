@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -75,6 +76,8 @@ func LoadProjectTimeline(pattern string, now time.Time) (*ProjectTimeline, error
 // ProjectTimeline lays projects out one per row on a range-frame year axis
 // that runs to now, in an SVG TimelineWidth wide and Height tall.
 type ProjectTimeline struct {
+	Title        string        // the SVG title
+	Caption      template.HTML // the margin note
 	Height       float64
 	AxisY        float64
 	TickY        float64 // bottom of the year ticks under the axis
@@ -125,6 +128,8 @@ func NewProjectTimeline(projects []Project, now time.Time) *ProjectTimeline {
 	}
 
 	t := &ProjectTimeline{
+		Title:      "Projects by year",
+		Caption:    "Projects by year. A line that runs to <em>now</em> is still active; a dot alone is a single year. Each name links to its section below.",
 		StartX:     timelineLeft,
 		EndX:       timelineRight,
 		StartLabel: strconv.Itoa(first - 1),
