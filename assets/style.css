@@ -160,8 +160,14 @@ body {
   stroke-linejoin: round;
 }
 
-.spark-dot {
+/* The latest week (dot and value) in red; the highest week quieter */
+.spark-line .spark-last {
   fill: var(--spark-accent);
+}
+
+.spark-line .spark-max {
+  fill: currentColor;
+  opacity: 0.45;
 }
 
 .spark-line text {
