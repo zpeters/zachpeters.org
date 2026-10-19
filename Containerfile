@@ -1,10 +1,10 @@
-FROM docker.io/golang:1.25 as builder
+FROM docker.io/golang:1.27 as builder
 WORKDIR /app
 COPY go.mod go.sum main.go blog.go ./
 RUN go mod download
 RUN go build  .
 
-FROM docker.io/debian:bookworm-slim
+FROM docker.io/debian:trixie-slim
 WORKDIR /root/
 COPY --from=builder /app/website .
 COPY ./templates/ templates/

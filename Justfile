@@ -1,3 +1,6 @@
+image := "registry.home.zach/zachpeters.org"
+version := "0.1.3"
+
 build:
   # Build your Go application
   go build -o bin/website .
@@ -20,11 +23,14 @@ dev:
 
 lint:
   # Lint your Go codebase
-  gofmt -l .
+  fd -e go -E vendor -X gofmt -l
   go vet ./...
   golangci-lint run ./...
 
+vuln:
+  # Check for known vulnerabilities
+  govulncheck ./...
 
 deploy:
-  podman build --isolation=chroot -t registry.home.zach/zachpeters.org:0.1.2 .
-  podman push --tls-verify=false registry.home.zach/zachpeters.org:0.1.2
+  podman build --isolation=chroot -t {{image}}:{{version}} .
+  podman push --tls-verify=false {{image}}:{{version}}

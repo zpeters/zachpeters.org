@@ -21,8 +21,12 @@ repos:
       language: system
       pass_filenames: false
       types: [go]
-# golangci-lint: Use the official golangci-lint hook repository
-- repo: https://github.com/golangci/golangci-lint
-  rev: v1.56.2  # Specify the version of golangci-lint you want to use
-  hooks:
+
+    # Use the golangci-lint from the nix flake
     - id: golangci-lint
+      name: golangci-lint
+      description: Runs golangci-lint
+      entry: golangci-lint run ./...
+      language: system
+      pass_filenames: false
+      types: [go]
