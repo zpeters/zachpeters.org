@@ -116,9 +116,20 @@ body {
 }
 
 .site-title {
-  font-size: 3.2rem;
+  font-size: 2.8rem;
   line-height: 1;
   margin: 0;
+}
+
+/* Beside both the name and the bar: tag line level with the top of the
+   name, contact level with the bottom of the bar */
+.site-notes {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .site-notes p {
@@ -140,6 +151,11 @@ body {
   .masthead {
     grid-template-columns: 1fr;
     padding-top: 2rem;
+  }
+
+  .site-notes {
+    grid-column: 1;
+    grid-row: auto;
   }
 }
 
