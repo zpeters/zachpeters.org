@@ -1,3 +1,5 @@
+/* Site overrides. Load after tufte.css so these win. */
+
 nav ul {
   padding-top: 16px;
   padding-left: 0;
@@ -7,4 +9,59 @@ nav ul {
 nav li {
   display: inline-block;
   padding-right: 18px;
+}
+
+/* Site name sits below the page title (h1) in the hierarchy */
+.site-title {
+  font-size: 2.4rem;
+  line-height: 1.1;
+  margin-top: 4rem;
+  margin-bottom: 0;
+}
+
+/* One article per page; Tufte's 5rem padding left big gaps */
+main > article {
+  padding: 1rem 0 2rem;
+}
+
+footer {
+  padding-bottom: 3rem;
+}
+
+h1,
+h2,
+h3,
+.site-title,
+p.subtitle {
+  text-wrap: balance;
+}
+
+/* About 70 characters per line */
+p {
+  max-width: 28em;
+}
+
+.site-title,
+p.subtitle {
+  max-width: none;
+}
+
+/* Tufte sets code in rem, which is small next to 1.4rem body text */
+code {
+  font-size: 0.85em;
+}
+
+pre > code {
+  font-size: 1.1rem;
+}
+
+.meta {
+  color: #666;
+  font-size: 0.9em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .meta {
+    color: #999;
+  }
 }

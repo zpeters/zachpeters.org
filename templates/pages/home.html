@@ -19,7 +19,7 @@
     {{range .recentPosts}}
       <li>
         <a href="/blog/{{.URL}}">{{.Title}}</a>
-        <span style="color: #666; font-size: 0.9em;"> — {{.FormattedDate}}</span>
+        <span class="meta"> — <time datetime="{{.Date.Format "2006-01-02"}}">{{.FormattedDate}}</time></span>
       </li>
     {{end}}
   </ul>

@@ -110,7 +110,5 @@ func parseFilename(filename string) (time.Time, string, error) {
 }
 
 func FormatDate(t time.Time) string {
-	baseFormat := t.Format("Monday, Jan 2, 2006")
-	timeFormat := t.Format("at 03:04PM")
-	return fmt.Sprintf("%s %s", baseFormat, timeFormat)
+	return t.Format("Jan 2, 2006")
 }
