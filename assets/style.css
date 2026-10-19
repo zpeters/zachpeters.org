@@ -129,27 +129,28 @@ body {
   }
 }
 
+/* The whole sparkline links to the GitHub profile; no Tufte underline */
 .spark {
   grid-column: 1;
   grid-row: 1;
+  display: block;
 }
 
-.spark p {
-  margin: 0;
-  max-width: none;
-  font-size: 1.1rem;
-  line-height: 1.4;
+.spark:link,
+.spark:visited {
+  background: none;
+  text-shadow: none;
+  color: inherit;
 }
 
-.spark-label {
-  font-style: italic;
+.spark:hover .spark-line polyline {
+  stroke-width: 1.75;
 }
 
 .spark-line {
   display: block;
   width: 100%;
   height: auto;
-  margin: 0.25rem 0;
 }
 
 .spark-line polyline {
@@ -168,10 +169,6 @@ body {
   font-size: 15px;
 }
 
-.spark-axis {
-  display: flex;
-  justify-content: space-between;
-}
 
 .site-title {
   font-size: 2.2rem;
