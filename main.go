@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/gin-contrib/gzip"
-	"github.com/russross/blackfriday/v2"
 
 	"github.com/gin-gonic/gin"
 )
@@ -81,7 +80,7 @@ func main() {
 		}
 
 		if foundPost != nil {
-			output := blackfriday.Run([]byte(foundPost.Content))
+			output := RenderMarkdown([]byte(foundPost.Content))
 			foundPost.Content = string(output)
 
 			c.HTML(http.StatusOK, "blog-post.html", gin.H{
