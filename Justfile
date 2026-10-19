@@ -1,5 +1,9 @@
 image := "registry.home.zach/zachpeters.org"
 version := "0.1.3"
+# This machine is arm64; the cluster is x86_64, so build on a remote x86
+# podman. Create the connection once:
+#   podman system connection add cluster ssh://user@host/run/user/1000/podman/podman.sock
+builder := "cluster"
 
 build:
   # Build your Go application
@@ -31,6 +35,16 @@ vuln:
   # Check for known vulnerabilities
   govulncheck ./...
 
-deploy:
-  podman build --isolation=chroot -t {{image}}:{{version}} .
-  podman push --tls-verify=false {{image}}:{{version}}
+# build the image on the remote x86 podman
+image-build:
+  podman --connection {{builder}} build --platform linux/amd64 -t {{image}}:{{version}} .
+
+# fallback: build here via qemu emulation
+image-build-local:
+  podman build --platform linux/amd64 -t {{image}}:{{version}} .
+
+# push the image to the home registry (from the remote builder)
+image-push:
+  podman --connection {{builder}} push --tls-verify=false {{image}}:{{version}}
+
+deploy: image-build image-push
