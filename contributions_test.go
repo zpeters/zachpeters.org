@@ -44,13 +44,13 @@ func TestParseContributionsEmpty(t *testing.T) {
 
 func TestNewSparkline(t *testing.T) {
 	s := NewSparkline([]int{0, 10, 5}, time.Time{}, time.Time{})
-	if s.Points != "0.0,48.0 160.0,0.0 320.0,24.0" {
+	if s.Points != "0.0,36.0 120.0,0.0 240.0,18.0" {
 		t.Errorf("points = %q", s.Points)
 	}
-	if s.Max != 10 || s.MaxX != 160 || s.MaxY != 0 {
+	if s.Max != 10 || s.MaxX != 120 || s.MaxY != 0 {
 		t.Errorf("max = %d at (%v,%v)", s.Max, s.MaxX, s.MaxY)
 	}
-	if s.Last != 5 || s.LastX != 320 || s.LastY != 24 {
+	if s.Last != 5 || s.LastX != 240 || s.LastY != 18 {
 		t.Errorf("last = %d at (%v,%v)", s.Last, s.LastX, s.LastY)
 	}
 	if s.Total != "15" {
