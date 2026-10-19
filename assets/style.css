@@ -58,9 +58,8 @@ body {
   }
 }
 
-/* Masthead: nav bar over the text column, site name in the sidenote column */
+/* Masthead: site name, then the nav bar over the text column */
 .masthead {
-  position: relative;
   padding-top: 4rem;
 }
 
@@ -106,10 +105,8 @@ body {
 }
 
 .site-id {
-  position: absolute;
-  top: 4rem;
-  left: calc(var(--text-width) * 1.1);
-  width: 24rem;
+  width: var(--text-width);
+  margin-bottom: 1.5rem;
 }
 
 .site-title {
@@ -136,9 +133,7 @@ body {
   }
 
   .site-id {
-    position: static;
     width: auto;
-    margin-bottom: 1.5rem;
   }
 
   .masthead nav {
@@ -212,10 +207,10 @@ main > article,
   line-height: 1.3;
 }
 
-/* Beside the first line of the post, below the site name block */
+/* Beside the title, on its baseline */
 .post-date {
-  top: 100%;
-  margin: 4.4rem 0 0;
+  top: 2rem;
+  margin: 0;
 }
 
 /* No top/bottom: keeps its line's vertical position */
