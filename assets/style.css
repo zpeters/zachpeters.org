@@ -132,6 +132,12 @@ pre > code {
   font-size: 1.1rem;
 }
 
+/* Figures share the text column, so their margin-note captions line up
+   with the sidenotes */
+figure:not(.fullwidth) {
+  max-width: var(--text-width);
+}
+
 /* Dates as margin notes, in the sidenote column. Percentages resolve
    against the article width, the same as --text-width elsewhere. */
 main > article,
