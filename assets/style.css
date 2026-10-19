@@ -1,22 +1,90 @@
 /* Site overrides. Load after tufte.css so these win. */
 
-nav ul {
-  padding-top: 16px;
-  padding-left: 0;
-  list-style-type: none;
+/* Width of the text column: Tufte's 55%, capped at the p max-width
+   (28em at the 1.4rem body size). Sidenotes start 10% past it. */
+:root {
+  --text-width: min(55%, 39.2rem);
 }
 
-nav li {
-  display: inline-block;
-  padding-right: 18px;
+/* Masthead: nav bar over the text column, site name in the sidenote column */
+.masthead {
+  position: relative;
+  padding-top: 4rem;
 }
 
-/* Site name sits below the page title (h1) in the hierarchy */
+.masthead nav {
+  width: var(--text-width);
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.masthead nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.75rem;
+  margin: 0;
+  padding: 0.4rem 0;
+  list-style: none;
+}
+
+/* Tufte adds margin-top to every li but the first */
+.masthead nav li {
+  margin: 0;
+}
+
+.masthead nav a:link,
+.masthead nav a:visited,
+.site-title a:link,
+.site-title a:visited {
+  background: none;
+  text-shadow: none;
+  color: inherit;
+}
+
+.masthead nav a {
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.08em;
+}
+
+.masthead nav a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.site-id {
+  position: absolute;
+  top: 4rem;
+  left: calc(var(--text-width) * 1.1);
+  width: 24rem;
+}
+
 .site-title {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   line-height: 1.1;
-  margin-top: 4rem;
-  margin-bottom: 0;
+  margin: 0;
+}
+
+.site-id p.subtitle {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 760px) {
+  .masthead {
+    padding-top: 2rem;
+  }
+
+  .site-id {
+    position: static;
+    width: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .masthead nav {
+    width: 100%;
+  }
 }
 
 /* One article per page; Tufte's 5rem padding left big gaps */
@@ -28,6 +96,10 @@ footer {
   padding-bottom: 3rem;
 }
 
+footer hr {
+  width: var(--text-width);
+}
+
 h1,
 h2,
 h3,
@@ -36,7 +108,7 @@ p.subtitle {
   text-wrap: balance;
 }
 
-/* About 70 characters per line */
+/* About 70 characters per line; keep in sync with --text-width */
 p {
   max-width: 28em;
 }
