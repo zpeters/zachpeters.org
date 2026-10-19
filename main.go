@@ -99,9 +99,9 @@ func main() {
 	})
 
 	router.GET("/software", func(c *gin.Context) {
-		// Built from the page's own project headings, so a new project
-		// shows up on the timeline without other edits
-		timeline, err := LoadProjectTimeline("templates/pages/software-projects.html", time.Now())
+		// Built from the project headings in the software-*.html templates,
+		// so a new project shows up on the timeline without other edits
+		timeline, err := LoadProjectTimeline("templates/pages/software-*.html", time.Now())
 		if err != nil {
 			log.Printf("Could not load project timeline: %v", err)
 		}
@@ -113,9 +113,14 @@ func main() {
 	})
 
 	router.GET("/hardware", func(c *gin.Context) {
+		timeline, err := LoadProjectTimeline("templates/pages/hardware-*.html", time.Now())
+		if err != nil {
+			log.Printf("Could not load project timeline: %v", err)
+		}
 		c.HTML(http.StatusOK, "hardware-projects.html", gin.H{
-			"section": "hardware",
-			"title":   "Hardware",
+			"section":  "hardware",
+			"title":    "Hardware",
+			"timeline": timeline,
 		})
 	})
 

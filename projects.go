@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strconv"
@@ -53,13 +54,22 @@ func ParseProjects(src string) []Project {
 	return projects
 }
 
-// LoadProjectTimeline builds the timeline for the projects in a template file.
-func LoadProjectTimeline(path string, now time.Time) (*ProjectTimeline, error) {
-	src, err := os.ReadFile(path)
+// LoadProjectTimeline builds the timeline for the project headings in the
+// template files that match pattern, e.g. "templates/pages/hardware-*.html".
+func LoadProjectTimeline(pattern string, now time.Time) (*ProjectTimeline, error) {
+	paths, err := filepath.Glob(pattern)
 	if err != nil {
 		return nil, err
 	}
-	return NewProjectTimeline(ParseProjects(string(src)), now), nil
+	var projects []Project
+	for _, path := range paths {
+		src, err := os.ReadFile(path)
+		if err != nil {
+			return nil, err
+		}
+		projects = append(projects, ParseProjects(string(src))...)
+	}
+	return NewProjectTimeline(projects, now), nil
 }
 
 // ProjectTimeline lays projects out one per row on a range-frame year axis
