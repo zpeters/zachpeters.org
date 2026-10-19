@@ -26,8 +26,8 @@ type Sparkline struct {
 }
 
 const (
-	SparkWidth  = 560.0
-	SparkHeight = 60.0
+	SparkWidth  = 320.0
+	SparkHeight = 48.0
 )
 
 // StartContributions loads the user's contribution calendar now and then

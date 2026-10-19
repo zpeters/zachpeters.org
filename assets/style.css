@@ -58,8 +58,8 @@ body {
   }
 }
 
-/* Masthead grid: the sparkline over the text column with the site name
-   block beside it in the sidenote column, the nav bar below. In the page
+/* Masthead grid: the site name block over the text column with the
+   sparkline beside it in the sidenote column, the nav bar below. In the page
    flow, so nothing below can overlap it. */
 .masthead {
   display: grid;
@@ -113,7 +113,7 @@ body {
 }
 
 .site-id {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 1;
 }
 
@@ -131,7 +131,7 @@ body {
 
 /* The whole sparkline links to the GitHub profile; no Tufte underline */
 .spark {
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 1;
   display: block;
 }
