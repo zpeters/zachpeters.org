@@ -1,5 +1,35 @@
 /* Site overrides. Load after tufte.css so these win. */
 
+/* ET Book with old-style figures, as in Tufte's books. ET Book ships each
+   figure style as its own file, so font-variant-numeric can't switch them. */
+@font-face {
+  font-family: "et-book-osf";
+  src: url("et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff2") format("woff2"), url("et-book/et-book-roman-old-style-figures/et-book-roman-old-style-figures.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "et-book-osf";
+  src: url("et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff2") format("woff2"), url("et-book/et-book-display-italic-old-style-figures/et-book-display-italic-old-style-figures.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "et-book-osf";
+  src: url("et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff2") format("woff2"), url("et-book/et-book-semi-bold-old-style-figures/et-book-semi-bold-old-style-figures.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: et-book-osf, et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+}
+
 /* Width of the text column: Tufte's 55%, capped at the p max-width
    (28em at the 1.4rem body size). Sidenotes start 10% past it. */
 :root {
