@@ -104,8 +104,11 @@ body {
   text-underline-offset: 0.2em;
 }
 
+/* Above the bar, in the sidenote column; in the page flow, so nothing
+   below can overlap it */
 .site-id {
-  width: var(--text-width);
+  margin-left: calc(var(--text-width) * 1.1);
+  width: 24rem;
   margin-bottom: 1.5rem;
 }
 
@@ -133,6 +136,7 @@ body {
   }
 
   .site-id {
+    margin-left: 0;
     width: auto;
   }
 
