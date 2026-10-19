@@ -149,6 +149,11 @@ body {
   stroke-width: 1.75;
 }
 
+.spark-label {
+  display: block;
+  text-align: right;
+}
+
 .spark-line {
   display: block;
   width: 100%;
