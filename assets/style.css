@@ -58,24 +58,13 @@ body {
   }
 }
 
-/* Masthead: the name over the text column with the tag line and contact
-   beside it as margin notes, bottoms aligned; the nav bar below. A grid,
-   so it is in the page flow and nothing below can overlap it. */
+/* Masthead: site name, then the nav bar over the text column */
 .masthead {
-  display: grid;
-  grid-template-columns: var(--text-width) 24rem;
-  column-gap: calc(var(--text-width) * 0.1);
-  row-gap: 1rem;
-  align-items: end;
   padding-top: 4rem;
 }
 
-.site-title,
 .masthead nav {
-  grid-column: 1;
-}
-
-.masthead nav {
+  width: var(--text-width);
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
 }
@@ -115,50 +104,44 @@ body {
   text-underline-offset: 0.2em;
 }
 
+/* Above the bar, in the sidenote column; in the page flow, so nothing
+   below can overlap it */
+.site-id {
+  margin-left: calc(var(--text-width) * 1.1);
+  width: 24rem;
+  margin-bottom: 1.5rem;
+}
+
 .site-title {
-  font-size: 2.8rem;
-  line-height: 1;
+  font-size: 2.2rem;
+  line-height: 1.1;
   margin: 0;
 }
 
-/* Margin notes beside each row: contact beside the name (bottoms
-   aligned), tag line centered on the bar */
-.site-title {
-  grid-row: 1;
-}
-
-.masthead nav {
-  grid-row: 2;
-}
-
-.masthead .contact,
-.masthead p.subtitle {
-  grid-column: 2;
-  margin: 0;
-}
-
-.masthead .contact {
-  grid-row: 1;
+.site-id .contact {
   font-size: 1.1rem;
   line-height: 1.6;
+  margin-top: 0.75rem;
 }
 
-.masthead p.subtitle {
-  grid-row: 2;
-  align-self: center;
+.site-id p.subtitle {
   font-size: 1.25rem;
   line-height: 1.4;
+  margin-top: 0.5rem;
 }
 
 @media (max-width: 760px) {
   .masthead {
-    grid-template-columns: 1fr;
     padding-top: 2rem;
   }
 
-  .masthead > * {
-    grid-column: 1;
-    grid-row: auto;
+  .site-id {
+    margin-left: 0;
+    width: auto;
+  }
+
+  .masthead nav {
+    width: 100%;
   }
 }
 
