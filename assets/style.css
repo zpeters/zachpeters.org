@@ -176,10 +176,17 @@ body {
   margin: 0;
 }
 
-.site-id .contact {
+.spark-caption {
+  display: block;
   font-size: 1.1rem;
-  line-height: 1.6;
-  margin-top: 0.75rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.spark:hover .spark-caption {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
 }
 
 .site-id p.subtitle {
