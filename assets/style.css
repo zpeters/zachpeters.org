@@ -36,6 +36,28 @@ body {
   --text-width: min(55%, 39.2rem);
 }
 
+/* Tufte's link underline is a gradient with background-colored caps at
+   each end; its dark mode only changes the text-shadow, so set the caps
+   to the dark background too */
+@media (prefers-color-scheme: dark) {
+  a:link,
+  .tufte-underline,
+  .hover-tufte-underline:hover {
+    background: linear-gradient(#151515, #151515), linear-gradient(#151515, #151515), linear-gradient(currentColor, currentColor);
+    background-size: 0.05em 1px, 0.05em 1px, 1px 1px;
+    background-repeat: no-repeat, no-repeat, repeat-x;
+    background-position: 0% 93%, 100% 93%, 0% 93%;
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) and (-webkit-min-device-pixel-ratio: 0) {
+  a:link,
+  .tufte-underline,
+  .hover-tufte-underline:hover {
+    background-position-y: 87%, 87%, 87%;
+  }
+}
+
 /* Masthead: nav bar over the text column, site name in the sidenote column */
 .masthead {
   position: relative;
