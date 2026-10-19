@@ -121,30 +121,33 @@ body {
   margin: 0;
 }
 
-/* Beside both the name and the bar: tag line level with the top of the
-   name, contact level with the bottom of the bar */
-.site-notes {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+/* Margin notes beside each row: contact beside the name (bottoms
+   aligned), tag line centered on the bar */
+.site-title {
+  grid-row: 1;
 }
 
-.site-notes p {
+.masthead nav {
+  grid-row: 2;
+}
+
+.masthead .contact,
+.masthead p.subtitle {
+  grid-column: 2;
   margin: 0;
 }
 
-.site-notes p.subtitle {
-  font-size: 1.25rem;
-  line-height: 1.4;
-}
-
-.site-notes .contact {
+.masthead .contact {
+  grid-row: 1;
   font-size: 1.1rem;
   line-height: 1.6;
-  margin-top: 0.5rem;
+}
+
+.masthead p.subtitle {
+  grid-row: 2;
+  align-self: center;
+  font-size: 1.25rem;
+  line-height: 1.4;
 }
 
 @media (max-width: 760px) {
@@ -153,7 +156,7 @@ body {
     padding-top: 2rem;
   }
 
-  .site-notes {
+  .masthead > * {
     grid-column: 1;
     grid-row: auto;
   }
