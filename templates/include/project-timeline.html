@@ -1,0 +1,31 @@
+{{define "project-timeline.html"}}
+{{/* Projects by year, built from the page's project headings (see
+     projects.go). Called with a *ProjectTimeline. */}}
+{{with .}}
+{{$t := .}}
+<figure class="lead-figure">
+  <label for="mn-projects" class="margin-toggle">&#8853;</label>
+  <input type="checkbox" id="mn-projects" class="margin-toggle" />
+  <span class="marginnote">Projects by year. A line that runs to <em>now</em> is still active; a dot alone is a single year. Each name links to its section below.</span>
+  <svg class="timeline" viewBox="0 0 560 {{.Height}}" role="img" aria-labelledby="pt-title">
+    <title id="pt-title">Projects by year</title>
+    {{range .Rows}}
+    <a href="#{{.ID}}">
+      <title>{{.Name}}: {{.Years}}</title>
+      {{if .Lead}}<line class="tl-lead" x1="0" y1="{{.Y}}" x2="{{.X1}}" y2="{{.Y}}" />{{end}}
+      {{if .Line}}<line x1="{{.X1}}" y1="{{.Y}}" x2="{{.X2}}" y2="{{.Y}}" />{{end}}
+      {{if .StartDot}}<circle cx="{{.X1}}" cy="{{.Y}}" r="3.5" />{{end}}
+      {{if .EndDot}}<circle cx="{{.X2}}" cy="{{.Y}}" r="3.5" />{{end}}
+      <text x="{{.LabelX}}" y="{{.LabelY}}" text-anchor="{{.Anchor}}">{{.Name}}</text>
+    </a>
+    {{end}}
+    <g class="tl-axis">
+      <line x1="{{.StartX}}" y1="{{.AxisY}}" x2="{{.EndX}}" y2="{{.AxisY}}" />
+      {{range .YearTicks}}<line class="tl-tick" x1="{{.}}" y1="{{$t.AxisY}}" x2="{{.}}" y2="{{$t.TickY}}" />{{end}}
+      <text x="{{.StartX}}" y="{{.Height}}" dy="-6">{{.StartLabel}}</text>
+      <text x="{{.EndX}}" y="{{.Height}}" dy="-6" text-anchor="end">now</text>
+    </g>
+  </svg>
+</figure>
+{{end}}
+{{end}}

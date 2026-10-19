@@ -20,6 +20,7 @@ type BlogPost struct {
 	Title         string
 	URL           string
 	Content       string
+	Excerpt       string // first sentence, plain text
 }
 
 func LoadBlogPosts(postsDir string) ([]BlogPost, error) {
@@ -50,6 +51,7 @@ func LoadBlogPosts(postsDir string) ([]BlogPost, error) {
 			Title:         title,
 			URL:           strings.ToLower(strings.ReplaceAll(title, " ", "-")),
 			Content:       content,
+			Excerpt:       Excerpt(content),
 		})
 
 		sort.Slice(posts, func(i, j int) bool {

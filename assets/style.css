@@ -182,6 +182,75 @@ body {
   margin: 0;
 }
 
+/* Timelines that open the Blog and Software pages: thin marks in the text
+   color, direct labels, a range-frame axis, a margin-note caption */
+.lead-figure {
+  margin: 1rem 0 2.5rem;
+}
+
+.timeline {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.timeline line {
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.timeline circle {
+  fill: currentColor;
+}
+
+.timeline text {
+  fill: currentColor;
+  font-size: 13px;
+}
+
+.timeline a:link,
+.timeline a:visited {
+  text-shadow: none;
+}
+
+.timeline a:hover text {
+  text-decoration: underline;
+}
+
+.timeline .tl-lead {
+  stroke-dasharray: 2 3;
+  opacity: 0.5;
+}
+
+.timeline .tl-leader {
+  stroke-width: 0.75;
+  opacity: 0.5;
+}
+
+.timeline .tl-axis line {
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+/* Blog index: no bullets, title and first sentence, date in the margin */
+section > ul.post-index {
+  width: var(--text-width);
+  padding: 0;
+  -webkit-padding-start: 0;
+  list-style: none;
+}
+
+.post-index li {
+  margin: 0 0 1.75rem;
+}
+
+.post-index .excerpt {
+  margin: 0.25rem 0 0;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
 .spark-caption {
   display: block;
   font-size: 1.1rem;

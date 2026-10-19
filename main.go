@@ -64,9 +64,10 @@ func main() {
 		}
 
 		c.HTML(http.StatusOK, "blog.html", gin.H{
-			"section": "blog",
-			"title":   "Blog",
-			"posts":   blogPosts,
+			"section":  "blog",
+			"title":    "Blog",
+			"posts":    blogPosts,
+			"timeline": NewPostTimeline(blogPosts, time.Now()),
 		})
 	})
 
@@ -98,9 +99,16 @@ func main() {
 	})
 
 	router.GET("/software", func(c *gin.Context) {
+		// Built from the page's own project headings, so a new project
+		// shows up on the timeline without other edits
+		timeline, err := LoadProjectTimeline("templates/pages/software-projects.html", time.Now())
+		if err != nil {
+			log.Printf("Could not load project timeline: %v", err)
+		}
 		c.HTML(http.StatusOK, "software-projects.html", gin.H{
-			"section": "software",
-			"title":   "Software",
+			"section":  "software",
+			"title":    "Software",
+			"timeline": timeline,
 		})
 	})
 

@@ -1,13 +1,37 @@
 {{template "header.html" .}}
 
 <section>
-<a href="/rss">RSS Feed</a>
+{{with .timeline}}
+  <figure class="lead-figure">
+    <label for="mn-posts" class="margin-toggle">&#8853;</label>
+    <input type="checkbox" id="mn-posts" class="margin-toggle" />
+    <span class="marginnote">Posts by date. Follow along with the <a href="/rss">RSS feed</a>.</span>
+    <svg class="timeline" viewBox="0 0 560 88" role="img" aria-labelledby="bt-title">
+      <title id="bt-title">Blog posts by date</title>
+      <g class="tl-axis">
+        <line x1="{{.StartX}}" y1="56" x2="{{.EndX}}" y2="56" />
+        <text x="{{.StartX}}" y="80">{{.StartLabel}}</text>
+        <text x="{{.EndX}}" y="80" text-anchor="end">now</text>
+      </g>
+      {{range .Marks}}
+      <a href="/blog/{{.URL}}">
+        <title>{{.Title}}</title>
+        <line class="tl-leader" x1="{{.X}}" y1="{{.Leader}}" x2="{{.X}}" y2="52" />
+        <circle cx="{{.X}}" cy="56" r="4" />
+        <text x="{{.X}}" y="{{.LabelY}}" text-anchor="{{.Anchor}}">{{.Title}}</text>
+      </a>
+      {{end}}
+    </svg>
+  </figure>
+{{end}}
+
 {{ if .posts }}
-  <ul class="post-list">
+  <ul class="post-index">
     {{range .posts}}
       <li>
         <a href="/blog/{{.URL}}">{{.Title}}</a>
         <time class="list-date" datetime="{{.Date.Format "2006-01-02"}}">{{.FormattedDate}}</time>
+        <p class="excerpt">{{.Excerpt}}</p>
       </li>
     {{end}}
   </ul>
