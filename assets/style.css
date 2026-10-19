@@ -251,19 +251,6 @@ section > ul.post-index {
   line-height: 1.6;
 }
 
-.spark-caption {
-  display: block;
-  font-size: 1.1rem;
-  font-style: italic;
-  line-height: 1.4;
-}
-
-.spark:hover .spark-caption {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-}
-
 .site-id p.subtitle {
   font-size: 1.25rem;
   line-height: 1.4;
