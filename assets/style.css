@@ -46,7 +46,8 @@
   letter-spacing: 0.08em;
 }
 
-.masthead nav a:hover {
+.masthead nav a:hover,
+.masthead nav a[aria-current] {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
@@ -94,6 +95,10 @@ main > article {
 
 footer {
   padding-bottom: 3rem;
+}
+
+.back {
+  margin-top: 3rem;
 }
 
 footer hr {

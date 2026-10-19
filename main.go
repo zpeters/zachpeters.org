@@ -48,6 +48,7 @@ func main() {
 		}
 
 		c.HTML(http.StatusOK, "home.html", gin.H{
+			"section":     "home",
 			"title":       "Hello, World!",
 			"recentPosts": recentPosts,
 		})
@@ -61,8 +62,9 @@ func main() {
 		}
 
 		c.HTML(http.StatusOK, "blog.html", gin.H{
-			"title": "Blog Posts",
-			"posts": blogPosts,
+			"section": "blog",
+			"title":   "Blog Posts",
+			"posts":   blogPosts,
 		})
 	})
 
@@ -83,6 +85,7 @@ func main() {
 			foundPost.Content = string(output)
 
 			c.HTML(http.StatusOK, "blog-post.html", gin.H{
+				"section": "blog-post",
 				"title":   foundPost.Title,
 				"date":    foundPost.Date,
 				"content": template.HTML(foundPost.Content),
@@ -94,13 +97,15 @@ func main() {
 
 	router.GET("/software", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "software-projects.html", gin.H{
-			"title": "Software Projects",
+			"section": "software",
+			"title":   "Software Projects",
 		})
 	})
 
 	router.GET("/hardware", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "hardware-projects.html", gin.H{
-			"title": "Hardware Projects",
+			"section": "hardware",
+			"title":   "Hardware Projects",
 		})
 	})
 

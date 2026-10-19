@@ -1,4 +1,4 @@
-{{template "header.html"}}
+{{template "header.html" .}}
 
 <h1>{{.title}}</h1>
 <p class="subtitle"><time datetime="{{.date.Format "2006-01-02"}}">{{.date.Format "Monday, Jan 2, 2006"}}</time></p>
@@ -6,5 +6,7 @@
 <section>
   {{.content }}
 </section>
+
+<p class="back"><a href="/blog">← All posts</a></p>
 
 {{template "footer.html"}}
