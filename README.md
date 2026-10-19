@@ -80,6 +80,18 @@ It took a while to get used to the "reverse" selection[^helix], but it has grown
 - Put the note text anywhere in the file. The end of the file is easiest.
 - Keep a note to one paragraph. Links, `code` and *italic* work in it.
 
+For a note without a number, use a margin note. There is no markdown
+syntax for it, so write the HTML in the paragraph:
+
+```markdown
+I grew the culture for 48 hours<label for="mn-incubate" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-incubate" class="margin-toggle"/><span class="marginnote">At 37 °C, the standard for human pathogens.</span> before the next test.
+```
+
+- Each `id` (here `mn-incubate`) must be different on the page. The `for`
+  value must be the same as the `id`.
+- Keep the label, input and span on one line, with no spaces between them.
+- On a narrow screen, the note hides behind a &#8853; that the reader taps.
+
 ### 5. Headings
 
 The post title is the page's top heading, so start at `##`:
