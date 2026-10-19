@@ -58,7 +58,7 @@ body {
   }
 }
 
-/* Masthead grid: the timeline over the text column with the site name
+/* Masthead grid: the sparkline over the text column with the site name
    block beside it in the sidenote column, the nav bar below. In the page
    flow, so nothing below can overlap it. */
 .masthead {
@@ -117,56 +117,60 @@ body {
   grid-row: 1;
 }
 
-/* Timeline: thin marks in the text color, direct labels, range-frame axis */
-.timeline {
+/* Sparkline: a thin line in the text color, no axes; Tufte's red dots on
+   the highest and the latest values */
+:root {
+  --spark-accent: #b02a2a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --spark-accent: #e06c6c;
+  }
+}
+
+.spark {
   grid-column: 1;
   grid-row: 1;
+}
+
+.spark p {
+  margin: 0;
+  max-width: none;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.spark-label {
+  font-style: italic;
+}
+
+.spark-line {
   display: block;
   width: 100%;
   height: auto;
+  margin: 0.25rem 0;
 }
 
-.timeline line {
+.spark-line polyline {
+  fill: none;
   stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: round;
+  stroke-width: 1.25;
+  stroke-linejoin: round;
 }
 
-.timeline circle {
+.spark-dot {
+  fill: var(--spark-accent);
+}
+
+.spark-line text {
   fill: currentColor;
+  font-size: 15px;
 }
 
-.timeline text {
-  fill: currentColor;
-  font-size: 13px;
-}
-
-.timeline .tl-before {
-  stroke-dasharray: 2 3;
-  opacity: 0.5;
-}
-
-.timeline .tl-axis line {
-  stroke-width: 1;
-  opacity: 0.6;
-}
-
-.timeline .tl-axis .tl-rug {
-  stroke-width: 1.5;
-  opacity: 1;
-}
-
-.timeline .tl-note {
-  font-style: italic;
-  opacity: 0.7;
-}
-
-.timeline a {
-  text-shadow: none;
-}
-
-.timeline a:hover text {
-  text-decoration: underline;
+.spark-axis {
+  display: flex;
+  justify-content: space-between;
 }
 
 .site-title {
@@ -196,7 +200,7 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .timeline {
+  .spark {
     display: none;
   }
 

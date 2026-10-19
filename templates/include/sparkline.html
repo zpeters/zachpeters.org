@@ -1,0 +1,22 @@
+{{define "sparkline.html"}}
+{{/* Weekly GitHub contributions, past year, as a Tufte sparkline: no axes,
+     red dots on the highest and the latest week with their values. */}}
+{{with contributions}}
+<div class="spark">
+  <p class="spark-label">GitHub contributions per week, past year</p>
+  <svg class="spark-line" viewBox="-6 -22 602 88" role="img"
+    aria-label="Weekly GitHub contributions from {{.From.Format "January 2006"}} to {{.To.Format "January 2006"}}: {{.Total}} in all, highest week {{.Max}}, latest week {{.Last}}.">
+    <polyline points="{{.Points}}" />
+    <circle class="spark-dot" cx="{{.MaxX}}" cy="{{.MaxY}}" r="3" />
+    <text x="{{.MaxX}}" y="{{.MaxY}}" dy="-9" text-anchor="middle">{{.Max}}</text>
+    <circle class="spark-dot" cx="{{.LastX}}" cy="{{.LastY}}" r="3" />
+    <text x="{{.LastX}}" y="{{.LastY}}" dx="8" dy="4">{{.Last}}</text>
+  </svg>
+  <p class="spark-axis">
+    <span>{{.From.Format "Jan 2006"}}</span>
+    <span>{{.Total}} contributions</span>
+    <span>{{.To.Format "Jan 2006"}}</span>
+  </p>
+</div>
+{{end}}
+{{end}}

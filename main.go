@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/gin-contrib/gzip"
 
@@ -28,6 +29,9 @@ func main() {
 	router.Static("/assets", "./assets")
 	router.StaticFile("/favicon.ico", "./assets/favicon.ico")
 
+	router.SetFuncMap(template.FuncMap{
+		"contributions": StartContributions("zpeters", 6*time.Hour),
+	})
 	router.LoadHTMLGlob("templates/**/*")
 
 	blogPosts, err := LoadBlogPosts("blog/")
