@@ -1,7 +1,9 @@
 {{template "header.html" .}}
 
-<h1>{{.title}}</h1>
-<p class="subtitle"><time datetime="{{.date.Format "2006-01-02"}}">{{.date.Format "Monday, Jan 2, 2006"}}</time></p>
+<div class="post-head">
+  <h1>{{.title}}</h1>
+  <p class="post-date"><time datetime="{{.date.Format "2006-01-02"}}">{{.date.Format "Monday, Jan 2, 2006"}}</time></p>
+</div>
 
 <section>
   {{.content }}

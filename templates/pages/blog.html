@@ -4,14 +4,11 @@
 <section>
 <a href="/rss">RSS Feed</a>
 {{ if .posts }}
-  <ul>
+  <ul class="post-list">
     {{range .posts}}
       <li>
-          <a href="/blog/{{.URL}}">
-            {{.Title}}
-          </a> 
-          -
-          <em>{{.Date.Format "Jan 2, 2006"}}</em>
+        <a href="/blog/{{.URL}}">{{.Title}}</a>
+        <time class="list-date" datetime="{{.Date.Format "2006-01-02"}}">{{.FormattedDate}}</time>
       </li>
     {{end}}
   </ul>

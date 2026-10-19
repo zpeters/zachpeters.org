@@ -14,11 +14,11 @@
 {{if .recentPosts}}
 <section>
   <h3>Recent Writing</h3>
-  <ul>
+  <ul class="post-list">
     {{range .recentPosts}}
       <li>
         <a href="/blog/{{.URL}}">{{.Title}}</a>
-        <span class="meta"> — <time datetime="{{.Date.Format "2006-01-02"}}">{{.FormattedDate}}</time></span>
+        <time class="list-date" datetime="{{.Date.Format "2006-01-02"}}">{{.FormattedDate}}</time>
       </li>
     {{end}}
   </ul>
