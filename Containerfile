@@ -7,7 +7,7 @@ ARG VERSION=dev
 RUN go build -ldflags "-X main.version=${VERSION}" .
 
 FROM docker.io/debian:trixie-slim
-WORKDIR /root/
+WORKDIR /srv/site
 COPY --from=builder /app/website .
 # The sparkline fetches from github.com over HTTPS
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
@@ -18,5 +18,7 @@ COPY ./reads/ reads/
 
 EXPOSE 8080
 ENV  GIN_MODE=release
+# Run as a non-root user; the site only reads its own files
+USER 10001:10001
 
-CMD ["/root/website"]
+CMD ["/srv/site/website"]
