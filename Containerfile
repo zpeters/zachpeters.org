@@ -3,7 +3,8 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY *.go ./
-RUN go build  .
+ARG VERSION=dev
+RUN go build -ldflags "-X main.version=${VERSION}" .
 
 FROM docker.io/debian:trixie-slim
 WORKDIR /root/

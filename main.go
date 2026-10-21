@@ -13,6 +13,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// version is the release version, set at build time with -ldflags
+var version = "dev"
+
 func main() {
 	router := gin.Default()
 
@@ -31,6 +34,7 @@ func main() {
 
 	router.SetFuncMap(template.FuncMap{
 		"contributions": StartContributions("zpeters", 6*time.Hour),
+		"version":       func() string { return version },
 	})
 	router.LoadHTMLGlob("templates/**/*")
 

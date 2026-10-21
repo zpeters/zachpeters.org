@@ -6,8 +6,8 @@ version := "0.2.0"
 builder := "cluster"
 
 build:
-  # Build your Go application
-  go build -o bin/website .
+  # Build your Go application, stamping in the release version
+  go build -ldflags "-X main.version={{version}}" -o bin/website .
 
 run: build
   # Run your application locally
@@ -37,11 +37,11 @@ vuln:
 
 # build the image on the remote x86 podman
 image-build:
-  podman --connection {{builder}} build --platform linux/amd64 -t {{image}}:{{version}} .
+  podman --connection {{builder}} build --platform linux/amd64 --build-arg VERSION={{version}} -t {{image}}:{{version}} .
 
 # fallback: build here via qemu emulation
 image-build-local:
-  podman build --platform linux/amd64 -t {{image}}:{{version}} .
+  podman build --platform linux/amd64 --build-arg VERSION={{version}} -t {{image}}:{{version}} .
 
 # push the image to the home registry (from the remote builder)
 image-push:
