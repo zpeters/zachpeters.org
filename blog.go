@@ -53,11 +53,11 @@ func LoadBlogPosts(postsDir string) ([]BlogPost, error) {
 			Content:       content,
 			Excerpt:       Excerpt(content),
 		})
-
-		sort.Slice(posts, func(i, j int) bool {
-			return posts[i].Date.After(posts[j].Date)
-		})
 	}
+
+	sort.Slice(posts, func(i, j int) bool {
+		return posts[i].Date.After(posts[j].Date)
+	})
 
 	return posts, nil
 }
