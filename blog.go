@@ -9,6 +9,7 @@ import (
 	"sort"
 	"strings"
 	"time"
+	"unicode"
 
 	"github.com/aquilax/truncate"
 	"github.com/gorilla/feeds"
@@ -52,7 +53,7 @@ func LoadBlogPosts(postsDir string) ([]BlogPost, error) {
 			Date:          date,
 			FormattedDate: FormatDate(date),
 			Title:         title,
-			URL:           strings.ToLower(strings.ReplaceAll(title, " ", "-")),
+			URL:           slugify(title),
 			Content:       content,
 			HTML:          template.HTML(RenderMarkdown([]byte(content))),
 			Excerpt:       Excerpt(content),
@@ -113,6 +114,26 @@ func parseFilename(filename string) (time.Time, string, error) {
 	}
 
 	return date, title, nil
+}
+
+// slugify makes a URL path part from a title: lower case, letters and digits
+// only, words joined by hyphens. Apostrophes are dropped, not hyphenated.
+func slugify(title string) string {
+	var b strings.Builder
+	hyphen := false
+	for _, r := range strings.ToLower(title) {
+		switch {
+		case r == '\'' || r == '’':
+			// dropped
+		case unicode.IsLetter(r) || unicode.IsDigit(r):
+			b.WriteRune(r)
+			hyphen = false
+		case !hyphen && b.Len() > 0:
+			b.WriteByte('-')
+			hyphen = true
+		}
+	}
+	return strings.TrimSuffix(b.String(), "-")
 }
 
 func FormatDate(t time.Time) string {
