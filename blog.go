@@ -41,6 +41,7 @@ func LoadBlogPosts(postsDir string) ([]BlogPost, error) {
 
 		contentBytes, err := os.ReadFile(file)
 		if err != nil {
+			log.Printf("Skipping file %s: %v", base, err)
 			continue
 		}
 		content := string(contentBytes)
