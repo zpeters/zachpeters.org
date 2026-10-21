@@ -66,12 +66,6 @@ func main() {
 	})
 
 	router.GET("/blog", func(c *gin.Context) {
-		if err != nil {
-			log.Printf("Could not load blog post list: %v", err)
-			c.HTML(http.StatusInternalServerError, "error.html", gin.H{"message": "Could not load blog posts."})
-			return
-		}
-
 		c.HTML(http.StatusOK, "blog.html", gin.H{
 			"section":  "blog",
 			"title":    "Blog",
