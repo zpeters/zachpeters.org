@@ -58,6 +58,16 @@ func main() {
 		c.String(http.StatusOK, "User-agent: *\nAllow: /\n\nSitemap: https://zachpeters.org/sitemap.xml\n")
 	})
 
+	router.GET("/sitemap.xml", func(c *gin.Context) {
+		sitemap, err := GenerateSitemap(blogPosts)
+		if err != nil {
+			log.Printf("Could not build sitemap: %v", err)
+			c.String(http.StatusInternalServerError, "could not build sitemap")
+			return
+		}
+		c.Data(http.StatusOK, "application/xml; charset=utf-8", []byte(sitemap))
+	})
+
 	router.NoRoute(func(c *gin.Context) {
 		c.HTML(http.StatusNotFound, "404.html", gin.H{})
 	})
