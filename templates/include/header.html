@@ -5,8 +5,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="A personal homepage for Zach Peters showcasing portfolio, projects, and contact information.">
+  {{- $desc := "A personal homepage for Zach Peters showcasing portfolio, projects, and contact information." }}
+  {{- with .description}}{{$desc = .}}{{end}}
+  <meta name="description" content="{{$desc}}">
+  <meta property="og:site_name" content="Zach Peters">
+  <meta property="og:type" content="{{with .description}}article{{else}}website{{end}}">
+  <meta property="og:title" content="{{with .title}}{{.}}{{else}}Zach Peters{{end}}">
+  <meta property="og:description" content="{{$desc}}">
   <title>{{with .title}}{{.}} · {{end}}Zach Peters</title>
   <link rel="stylesheet" href="/assets/tufte.css">
   <link rel="stylesheet" href="/assets/style.css">

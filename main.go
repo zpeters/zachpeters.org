@@ -88,10 +88,11 @@ func main() {
 
 		if foundPost != nil {
 			c.HTML(http.StatusOK, "blog-post.html", gin.H{
-				"section": "blog-post",
-				"title":   foundPost.Title,
-				"date":    foundPost.Date,
-				"content": foundPost.HTML,
+				"section":     "blog-post",
+				"title":       foundPost.Title,
+				"description": foundPost.Excerpt,
+				"date":        foundPost.Date,
+				"content":     foundPost.HTML,
 			})
 		} else {
 			c.HTML(http.StatusNotFound, "404.html", gin.H{})
