@@ -130,12 +130,12 @@ body {
 }
 
 /* The whole sparkline links to the GitHub profile; no Tufte underline */
-/* Width matches the 280-unit viewBox, so the SVG text stays about 15px */
+/* Width matches the 360-unit viewBox, so the SVG text stays about 15px */
 .spark {
   grid-column: 2;
   grid-row: 1;
   display: block;
-  max-width: 18.6rem;
+  max-width: 23.9rem;
 }
 
 .spark:link,
@@ -181,7 +181,6 @@ body {
   fill: currentColor;
   font-size: 15px;
 }
-
 
 .site-title {
   font-size: 2.2rem;
