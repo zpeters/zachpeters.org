@@ -81,7 +81,8 @@ func GenerateRssFeed(posts []BlogPost) (string, error) {
 
 	for _, post := range posts {
 		p := bluemonday.StripTagsPolicy()
-		strippedHtml := p.Sanitize(post.Content)
+		// Strip tags from the rendered HTML, so markdown syntax does not show
+		strippedHtml := p.Sanitize(string(post.HTML))
 		feed.Items = append(feed.Items, &feeds.Item{
 			Title: post.Title,
 			Link:  &feeds.Link{Href: "https://zachpeters.org/blog/" + post.URL},
