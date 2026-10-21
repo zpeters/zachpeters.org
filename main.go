@@ -87,14 +87,11 @@ func main() {
 		}
 
 		if foundPost != nil {
-			output := RenderMarkdown([]byte(foundPost.Content))
-			foundPost.Content = string(output)
-
 			c.HTML(http.StatusOK, "blog-post.html", gin.H{
 				"section": "blog-post",
 				"title":   foundPost.Title,
 				"date":    foundPost.Date,
-				"content": template.HTML(foundPost.Content),
+				"content": foundPost.HTML,
 			})
 		} else {
 			c.HTML(http.StatusNotFound, "404.html", gin.H{})
