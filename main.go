@@ -53,6 +53,11 @@ func main() {
 		c.String(http.StatusOK, "ok")
 	})
 
+	// Allow all crawlers, and point them at the sitemap
+	router.GET("/robots.txt", func(c *gin.Context) {
+		c.String(http.StatusOK, "User-agent: *\nAllow: /\n\nSitemap: https://zachpeters.org/sitemap.xml\n")
+	})
+
 	router.NoRoute(func(c *gin.Context) {
 		c.HTML(http.StatusNotFound, "404.html", gin.H{})
 	})
