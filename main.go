@@ -48,6 +48,11 @@ func main() {
 		panic(err)
 	}
 
+	// Cheap liveness and readiness check; does not render any page
+	router.GET("/healthz", func(c *gin.Context) {
+		c.String(http.StatusOK, "ok")
+	})
+
 	router.NoRoute(func(c *gin.Context) {
 		c.HTML(http.StatusNotFound, "404.html", gin.H{})
 	})
