@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
+	"log"
 	"os"
 	"path/filepath"
 	"sort"
@@ -83,11 +84,13 @@ func LoadReads(dir string) ([]Read, error) {
 	for _, file := range files {
 		src, err := os.ReadFile(file)
 		if err != nil {
-			return nil, err
+			log.Printf("Skipping read %s: %v", file, err)
+			continue
 		}
 		r, err := ParseRead(strings.TrimSuffix(filepath.Base(file), ".md"), src)
 		if err != nil {
-			return nil, fmt.Errorf("%s: %w", file, err)
+			log.Printf("Skipping read %s: %v", file, err)
+			continue
 		}
 		reads = append(reads, r)
 	}
