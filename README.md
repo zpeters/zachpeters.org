@@ -33,23 +33,30 @@ Other recipes:
 
 ### 1. Make the file
 
-Put one markdown file per post in `blog/`. The filename gives the date
-and the title:
+Put one markdown file per post in `blog/`. The filename gives the date,
+and the front matter gives the title:
 
 ```
 blog/2026-10-18T21:30:00-0500_Recommended-Apps.md
-     └──── date and time ────┘ └── title ──┘
+     └──── date and time ────┘ └─ any text ─┘
+```
+
+```markdown
+---
+title: Recommended Apps
+---
+
+The text of the post starts here.
 ```
 
 - **Date:** `YYYY-MM-DDTHH:MM:SS` plus the UTC offset (`-0500` for
   US Central daylight time, `-0600` for standard time).
-- **Underscore:** one `_` between the date and the title.
-- **Title:** words joined by `-`. Each `-` becomes a space, so
-  `Recommended-Apps` shows as "Recommended Apps". Do not use `-` inside a
-  word.
-- **URL:** the title in lowercase, for example `/blog/recommended-apps`.
-
-The file has no front matter. The text starts on the first line.
+- **Underscore:** one `_` between the date and the rest of the name. The
+  rest of the name is not used for the title, so it can hold anything.
+- **Title:** the `title:` line in the front matter. It can contain any
+  characters, including `-` and `_`.
+- **URL:** the title in lowercase, with punctuation removed and words
+  joined by `-`, for example `/blog/recommended-apps`.
 
 ### 2. Write the first sentence with care
 
