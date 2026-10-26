@@ -333,6 +333,39 @@ figure:not(.fullwidth) {
   max-width: var(--text-width);
 }
 
+/* Tables, booktabs style as in Tufte's books: heavy rules top and bottom,
+   a light rule under the header and above the total, no vertical rules
+   or fills. Numbers align right. */
+figure > table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  border-top: 0.08em solid currentColor;
+  border-bottom: 0.08em solid currentColor;
+}
+
+figure > table th,
+figure > table td {
+  padding: 0.35em 1em 0.35em 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+figure > table th {
+  font-weight: normal;
+  font-style: italic;
+  border-bottom: 1px solid currentColor;
+}
+
+figure > table tfoot td {
+  border-top: 1px solid currentColor;
+}
+
+figure > table .num {
+  text-align: right;
+}
+
 /* Dates as margin notes, in the sidenote column. Percentages resolve
    against the article width, the same as --text-width elsewhere. */
 main > article,
