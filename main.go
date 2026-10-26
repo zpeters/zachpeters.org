@@ -59,7 +59,11 @@ func main() {
 	})
 
 	router.GET("/sitemap.xml", func(c *gin.Context) {
-		sitemap, err := GenerateSitemap(blogPosts)
+		projects, err := LoadProjectPages("templates/pages/project-*.html")
+		if err != nil {
+			log.Printf("Could not load projects: %v", err)
+		}
+		sitemap, err := GenerateSitemap(blogPosts, projects)
 		if err != nil {
 			log.Printf("Could not build sitemap: %v", err)
 			c.String(http.StatusInternalServerError, "could not build sitemap")
@@ -119,30 +123,51 @@ func main() {
 		}
 	})
 
-	router.GET("/software", func(c *gin.Context) {
-		// Built from the project headings in the software-*.html templates,
+	router.GET("/projects", func(c *gin.Context) {
+		// Built from the project headings in the project-*.html templates,
 		// so a new project shows up on the timeline without other edits
-		timeline, err := LoadProjectTimeline("templates/pages/software-*.html", time.Now())
+		timeline, err := LoadProjectTimeline("templates/pages/project-*.html", time.Now())
 		if err != nil {
 			log.Printf("Could not load project timeline: %v", err)
 		}
-		c.HTML(http.StatusOK, "software-projects.html", gin.H{
-			"section":  "software",
-			"title":    "Software",
+		projects, err := LoadProjectPages("templates/pages/project-*.html")
+		if err != nil {
+			log.Printf("Could not load projects: %v", err)
+		}
+		c.HTML(http.StatusOK, "projects.html", gin.H{
+			"section":  "projects",
+			"title":    "Projects",
 			"timeline": timeline,
+			"projects": projects,
 		})
 	})
 
-	router.GET("/hardware", func(c *gin.Context) {
-		timeline, err := LoadProjectTimeline("templates/pages/hardware-*.html", time.Now())
+	router.GET("/projects/:id", func(c *gin.Context) {
+		projects, err := LoadProjectPages("templates/pages/project-*.html")
 		if err != nil {
-			log.Printf("Could not load project timeline: %v", err)
+			log.Printf("Could not load projects: %v", err)
 		}
-		c.HTML(http.StatusOK, "hardware-projects.html", gin.H{
-			"section":  "hardware",
-			"title":    "Hardware",
-			"timeline": timeline,
-		})
+		for _, p := range projects {
+			if p.ID == c.Param("id") {
+				c.HTML(http.StatusOK, "project-page.html", gin.H{
+					"section": "projects",
+					"title":   p.Name,
+					"project": p,
+				})
+				return
+			}
+		}
+		c.HTML(http.StatusNotFound, "404.html", gin.H{})
+	})
+
+	// The Software and Hardware pages are now Projects; keep their old links working
+	router.GET("/software", func(c *gin.Context) { c.Redirect(http.StatusMovedPermanently, "/projects") })
+	router.GET("/hardware", func(c *gin.Context) { c.Redirect(http.StatusMovedPermanently, "/projects") })
+	router.GET("/software/:id", func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently, "/projects/"+c.Param("id"))
+	})
+	router.GET("/hardware/:id", func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently, "/projects/"+c.Param("id"))
 	})
 
 	router.GET("/reads", func(c *gin.Context) {

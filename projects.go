@@ -56,7 +56,7 @@ func ParseProjects(src string) []Project {
 }
 
 // LoadProjectTimeline builds the timeline for the project headings in the
-// template files that match pattern, e.g. "templates/pages/hardware-*.html".
+// template files that match pattern, e.g. "templates/pages/project-*.html".
 func LoadProjectTimeline(pattern string, now time.Time) (*ProjectTimeline, error) {
 	paths, err := filepath.Glob(pattern)
 	if err != nil {

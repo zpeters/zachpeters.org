@@ -3,9 +3,9 @@
 The source for [zachpeters.org](https://zachpeters.org): a small Go (Gin)
 site styled with [Tufte CSS](https://edwardtufte.github.io/tufte-css/).
 
-This guide tells you how to add blog posts and software and hardware
-projects so that they show up correctly, including on the timelines that
-open the Blog, Software and Hardware pages.
+This guide tells you how to add blog posts and projects so that they show
+up correctly, including on the timelines that open the Blog and Projects
+pages.
 
 **Design rule:** follow Tufte's style. Use text and margin notes, not
 boxes and color. Use italic, not bold, for emphasis.
@@ -137,53 +137,64 @@ or a deploy. It then shows:
 - in "Recent Writing" on the home page (the 5 newest posts),
 - in the RSS feed at `/rss`.
 
-## Software projects
+## Projects
 
-All software projects are on one page:
-`templates/pages/software-projects.html`. Each project is a `<section>`:
+Every project is one file, `templates/pages/project-<id>.html`. Software
+and hardware projects are the same kind of thing, so there is no split.
+The Projects page (`/projects`) lists them with a summary. Each project has
+its own page at `/projects/<id>` that shows the whole file. The old
+`/software` and `/hardware` addresses redirect to the Projects page.
 
-```html
-<section>
-  <h3 id="ds">Dropsearch (2024-Current)</h3>
-  <p>
-    What it is and why you built it.
-  </p>
-</section>
-```
+1. **Make the file** `templates/pages/project-<id>.html`. The name must
+   start with `project-`. Put the heading and a summary first:
 
-The `<h3>` line feeds the timeline at the top of the page. It must have
-this form, on one line:
+   ```html
+   <section>
+     <h3 id="dropsearch">Dropsearch (2024-Current)</h3>
+     <p class="summary">
+       One or two sentences the Projects list shows under the title.
+     </p>
+     <p>
+       What it is and why you built it.
+     </p>
+   </section>
+   ```
 
-```html
-<h3 id="SHORT-ID">Project Name (YEARS)</h3>
-```
+   - The `<h3>` line must have this form, on one line:
+     `<h3 id="SHORT-ID">Project Name (YEARS)</h3>`. The table below says
+     what YEARS can be. A file without this heading is not listed.
+   - The `<p class="summary">` is required to show a summary. Without it,
+     the project is listed with no summary.
+   - The `id` must be different from all other project ids. The timeline,
+     the list and the project's page address all use it.
 
-- **`id`:** short, lowercase, no spaces. The timeline links to it, so it
-  must be different from all other ids on the page.
-- **Name:** the text before the parentheses. It is the label on the
-  timeline.
-- **YEARS:** one of these forms:
+   | YEARS          | Meaning                          | On the timeline                         |
+   | -------------- | -------------------------------- | --------------------------------------- |
+   | `2022`         | One year                         | A dot in that year                      |
+   | `2017-2019`    | Finished, over several years     | A line with a dot at each end           |
+   | `2023-Current` | Still active, started in 2023    | A dot, then a line to "now"             |
+   | `Ongoing`      | Still active, start not known    | A dashed start, then a line to "now"    |
 
-| YEARS          | Meaning                          | On the timeline                         |
-| -------------- | -------------------------------- | --------------------------------------- |
-| `2022`         | One year                         | A dot in that year                      |
-| `2017-2019`    | Finished, over several years     | A line with a dot at each end           |
-| `2023-Current` | Still active, started in 2023    | A dot, then a line to "now"             |
-| `Ongoing`      | Still active, start not known    | A dashed start, then a line to "now"    |
+   `Present` and `Now` work in place of `Current`. A heading without one of
+   these forms still shows on the page, but not on the timeline.
 
-`Present` and `Now` work in place of `Current`. A heading without one of
-these forms still shows on the page, but not on the timeline.
+2. **Nothing else.** The Projects pages read the files each time they are
+   opened, so a new file shows up after a save and refresh, with no
+   restart. Projects appear newest first on the list, and by start year on
+   the timeline.
 
-The timeline reads the page each time someone opens it. You do not need to
-restart the site or edit anything else.
+3. **Add images** in `assets/img/<id>/` as `.webp`, with margin captions
+   (see "Images" above). Put each `<figure>` between paragraphs, not inside
+   a `<p>`.
 
-Projects appear on the timeline in order of their start year. Their order
-on the page is up to you. Newest first is a good default.
+The list page is `templates/pages/projects.html`, and the project page
+wrapper is `templates/include/project-page.html`. Do not name other pages
+with the `project-` prefix, because the site reads every
+`project-*.html` file in `templates/pages/` as a project.
 
-### Sidenotes on these pages
+### Sidenotes on project pages
 
-The project pages are HTML, not markdown, so a sidenote uses Tufte's
-markup:
+Project files are HTML, not markdown, so a sidenote uses Tufte's markup:
 
 ```html
 for example, I use this for dotfiles
@@ -194,44 +205,6 @@ for example, I use this for dotfiles
 
 The `for` and `id` values must match each other and be different on the
 page.
-
-## Hardware projects
-
-Each hardware project has its own file, which the Hardware page includes.
-
-1. **Make the file** `templates/pages/hardware-<id>.html`. The name must
-   start with `hardware-`, because the timeline reads every
-   `hardware-*.html` file.
-
-   ```html
-   <section>
-     <h3 id="morse-glove">Morse Code Glove (2016)</h3>
-     <p>
-       What it is and how you built it.
-     </p>
-   </section>
-   ```
-
-   The `<h3>` line follows the same rules as for software projects (see
-   the table above).
-
-2. **Include it** in `templates/pages/hardware-projects.html`, after the
-   timeline line. Newest first is a good default:
-
-   ```html
-   {{template "project-timeline.html" .timeline}}
-
-   {{template "hardware-morse-glove.html"}}
-
-   {{template "hardware-bluetooth-radio.html"}}
-   ```
-
-3. **Add images** in `assets/img/<id>/` as `.webp`, with margin captions
-   (see "Images" above). Put each `<figure>` between paragraphs, not inside
-   a `<p>`.
-
-The included file name is the template name, so the file does not need a
-`{{define}}` line.
 
 ## Reads
 

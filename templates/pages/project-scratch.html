@@ -1,0 +1,35 @@
+<section>
+  <h3 id="scratch">Scratch Notes (2023-Current)</h3>
+  <p class="summary">
+    A minimal note-taking app written in Go and SQLite, with Litestream backups to remote storage.
+  </p>
+  <p>
+    <a href="https://scratch.zachpeters.org">Scratch Notes</a> is a minimal
+    note-taking application. This was written in Go using
+    <a href="https://docs.gofiber.io/">Fiber</a> and
+    <a href="https://sqlite.org/index.html">Sqlite</a>. I used this project
+    as an excuse to learn more about <a href="">litestream</a> so there is an
+    intersting bit about how this works. When the application boots up
+    <label for="container" class="margin-toggle sidenote-number"></labeL>
+    <input type="checkbox" id="container" class="margin-toggle" />
+    <span class="sidenote">Example
+      <a href="https://gist.github.com/zpeters/08d325dc3c435f31ab8f0b5ea63260e8">
+        <em>Dockerfile</em></a> and
+      <a href="https://gist.github.com/zpeters/ecf742fe4a4538c434fd866c49fcaa8e">
+        <em>start.sh</em></a> script</span>
+    it
+    will check for an existing backup on remote storage, if that exists and
+    there isn't a local database it will restore it. Then it will continue
+    with regular replications. For some reason with this I really struggled
+    to get litestream working with a local <a href="https://min.io">
+      <em>minio</em></a>
+    instance. So I have documented my config for future reference
+    <label for="litestream" class="margin-toggle sidenote-number"></labeL>
+    <input type="checkbox" id="litestream" class="margin-toggle" />
+    <span class="sidenote">
+      <a href="https://gist.github.com/zpeters/a2b967a2647297161e799e1bb7c005d7">
+        <em>litestream.yml</em>
+      </a>
+    </span>
+  </p>
+</section>

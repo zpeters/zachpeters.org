@@ -1,0 +1,21 @@
+{{template "header.html" .}}
+
+<section>
+{{template "project-timeline.html" .timeline}}
+
+{{ if .projects }}
+  <ul class="post-index">
+    {{range .projects}}
+      <li id="{{.ID}}">
+        <a href="/hardware/{{.ID}}">{{.Name}}</a>
+        <time class="list-date">{{.Years}}</time>
+        <p class="excerpt">{{.Summary}}</p>
+      </li>
+    {{end}}
+  </ul>
+{{ else }}
+  <p>Nothing yet...</p>
+{{ end }}
+</section>
+
+{{template "footer.html"}}
