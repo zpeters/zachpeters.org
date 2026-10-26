@@ -10,27 +10,8 @@
   </p>
 </section>
 
-{{if .recentPosts}}
 <section>
-  <h3>Recent Writing</h3>
-  <ul class="post-list">
-    {{range .recentPosts}}
-      <li>
-        <a href="/blog/{{.URL}}">{{.Title}}</a>
-        <time class="list-date" datetime="{{.Date.Format "2006-01-02"}}">{{.FormattedDate}}</time>
-      </li>
-    {{end}}
-  </ul>
-  <p><a href="/blog">View all posts →</a></p>
-</section>
-{{end}}
-
-<section>
-  <h3>Projects & Contact</h3>
-  <p>
-    The <a href="/projects">Projects page</a> has descriptions and code for
-    software and hardware projects I've been working on.
-  </p>
+  <h3>Contact</h3>
   <p>
     For a look into my background, you can review
     <a href="https://resume.zachpeters.org">my Resume</a>. If you want to get in touch,
