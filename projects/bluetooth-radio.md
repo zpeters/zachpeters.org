@@ -4,7 +4,7 @@ years: "2017"
 summary: "An old clock radio, rebuilt with a Bluetooth amplifier board as a housewarming gift in 2017."
 ---
 
-In 2017, a good friend was moving from away so we wanted to give her a going-away/ housewarming gift for her new place. She always had a flair for mid-century modern so we decided that something with that style would be the perfect gift
+In 2017, a good friend was moving away so we wanted to give her a going-away/ housewarming gift for her new place. She always had a flair for mid-century modern so we decided that something with that style would be the perfect gift
 
 After some searching around, we found the perfect thing. It was an older clock radio, that had just enough _mid-century_ feel. Now to make it special.
 

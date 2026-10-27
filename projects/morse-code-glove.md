@@ -12,7 +12,7 @@ Nevertheless, I decided to see this one through. Please excuse my primitive cons
 <img src="/assets/img/morse-code-glove/20160724-IMG_20160724_085317-thumb.webp">
 </figure>
 
-The core of this project came together pretty quickly . Construction as you can see if very rough, but it was enough to get the basic concept going. Within a few minutes of its creation i could easily switch tracks and adjust the volume on my media player with little mental interruption of the task i was working on.
+The core of this project came together pretty quickly. Construction as you can see is very rough, but it was enough to get the basic concept going. Within a few minutes of its creation i could easily switch tracks and adjust the volume on my media player with little mental interruption of the task i was working on.
 
 <figure>
 <img src="/assets/img/morse-code-glove/20160724-IMG_20160724_085127-thumb.webp">

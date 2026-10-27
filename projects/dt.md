@@ -4,7 +4,7 @@ years: "2020"
 summary: "A Svelte mini-app that mixes Jack Handey's Deep Thoughts with the Astronomy Picture of the Day."
 ---
 
-[Deep Thoughts](https://deepthoughts.zachpeters.org) was an exercise for learning <a href="">Sevelte</a>. This mini-app combines two of my favorite things - Jack Handey and the _Astronomy Picture of the Day_
+[Deep Thoughts](https://deepthoughts.zachpeters.org) was an exercise for learning Svelte. This mini-app combines two of my favorite things - Jack Handey and the _Astronomy Picture of the Day_
 
 <div class="epigraph">
 <blockquote>
