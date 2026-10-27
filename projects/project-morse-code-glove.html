@@ -1,0 +1,105 @@
+<section>
+  <h3 id="morse-code-glove">Morse Code Glove (2016)</h3>
+  <p class="summary">
+    A glove that turns finger taps into Morse letters, to test controls for a car computer that you do not have to look at.
+  </p>
+  <em>Coming Soon</em>
+</section>
+
+<section>
+  <figure>
+    <img src="/assets/img/morse-code-glove/20160724-IMG_20160724_085127-thumb.webp">
+  </figure>
+  <figure>
+    <img src="/assets/img/morse-code-glove/20160724-IMG_20160724_085317-thumb.webp">
+  </figure>
+</section>
+
+title: Morse Code Glove date: 2016-07-24 author: Zach type: post tags:
+
+project description: Experiment with morse code interfaces link: /projects/morse-code-glove/ screenshot: /img/glove/20160724-IMG_20160724_085317-thumb.jpg
+The Morse Glove is an interface for a project to experiment with different “sight free” interfaces for an in-car computer. The theory is that many “hands free” devices (like Siri) are still very distracting since you need to engage the verbal areas of your brain.
+
+By using a totally non-visual medium that can be learned through memorization, the commands can easily be turned into “reflex” like responses that take little thought to execute.
+
+The glove and wrist pieces
+
+The core of this project came together pretty quickly . Construction as you can see if very rough, but it was enough to get the basic concept going. Within a few minutes of its creation i could easily switch tracks and adjust the volume on my media player with little mental interruption of the task i was working on.
+>
+
+Closeup of the Teensy and my terrible construction skills
+
+Future experimentation would be around the glove. As you can imagine it’s very cumbersome!
+
+Below is a parts list and code to get you started.
+
+
+Morse Glove “driver”
+This just decodes finger touches (dit and dah) into letters just as if you had typed them into a keyboard. This makes it very simple to interface with other software. In my experimentation i created a simple script menu to run different https://www.musicpd.org/ commands to control a music player.
+
+https://gist.github.com/zpeters/59a5f6345897309da9eef729780c09f3
+
+<gist zpeters 59a5f6345897309da9eef729780c09f3>
+
+
+
+</section>
+
+<h1>
+  Parts</h1>
+<table>
+  <tr>
+    <th>Part</th>
+    <th>Description</th>
+    <th>Cost</th>
+    <th>URL</th>
+  </tr>
+  <tr>
+    <td>Elastic band</td>
+    <td>Just something simple to mount the board on</td>
+    <td>$10</td>
+    <td><a href="http://amzn.com/B00SN6987Y">http://amzn.com/B00SN6987Y</a></td>
+  </tr>
+  <tr>
+    <td>Glove</td>
+    <td>The cheapest conductive glove i could find at Walmart</td>
+    <td>$3.95</td>
+    <td><a href="https://goo.gl/pWZz7M">http://goo.gl/pWZz7M</a></td>
+  </tr>
+  <tr>
+    <td>Conductive Thread</td>
+    <td>You'll need a decently sturdy needle for this.</td>
+    <td>$8.00</td>
+    <td><a href="http://amzn.com/B00W3D3X9W">http://amzn.com/B00W3D3X9W</a></td>
+  </tr>
+  <tr>
+    <td>Jumper Wires</td>
+    <td>Easy way to connect things for experimenting</td>
+    <td>$5.00</td>
+    <td><a href="http://amzn.com/B0002KRABU">http://amzn.com/B0002KRABU</a></td>
+  </tr>
+  <tr>
+    <td>Headers</td>
+    <td>Makes it easy to remove the teensy when you are done tinkering</td>
+    <td>$5.00</td>
+    <td><a href="https://goo.gl/JszxBU">http://goo.gl/JszxBU</a></td>
+  </tr>
+  <tr>
+    <td>Perfboard</td>
+    <td>Really easy way to mount your projects</td>
+    <td>$8.50</td>
+    <td><a href="https://www.adafruit.com/product/589">https://www.adafruit.com/product/589</a></td>
+  </tr>
+  <tr>
+    <td>Teensy</td>
+    <td>The best "arduino like" out there</td>
+    <td>$20.00</td>
+    <td><a href="https://www.pjrc.com/store/teensy32.html">https://www.pjrc.com/store/teensy32.html</a></td>
+  </tr>
+  <tr>
+    <td><b>Total</b></td>
+    <td></td>
+    <td>~ $60</td>
+    <td></td>
+  </tr>
+</table>

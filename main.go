@@ -16,6 +16,9 @@ import (
 // version is the release version, set at build time with -ldflags
 var version = "dev"
 
+// projectGlob matches the project pages, one file per project
+const projectGlob = "projects/project-*.html"
+
 func main() {
 	router := gin.Default()
 
@@ -32,11 +35,14 @@ func main() {
 	router.Static("/assets", "./assets")
 	router.StaticFile("/favicon.ico", "./assets/favicon.ico")
 
-	router.SetFuncMap(template.FuncMap{
+	funcs := template.FuncMap{
 		"contributions": StartContributions("zpeters", 6*time.Hour),
 		"version":       func() string { return version },
-	})
-	router.LoadHTMLGlob("templates/**/*")
+	}
+	// Shared includes and error pages live in templates/, the pages in pages/
+	tmpl := template.Must(template.New("").Funcs(funcs).ParseGlob("templates/*/*"))
+	tmpl = template.Must(tmpl.ParseGlob("pages/*.html"))
+	router.SetHTMLTemplate(tmpl)
 
 	blogPosts, err := LoadBlogPosts("blog/")
 	if err != nil {
@@ -59,7 +65,7 @@ func main() {
 	})
 
 	router.GET("/sitemap.xml", func(c *gin.Context) {
-		projects, err := LoadProjectPages("templates/pages/project-*.html")
+		projects, err := LoadProjectPages(projectGlob)
 		if err != nil {
 			log.Printf("Could not load projects: %v", err)
 		}
@@ -124,13 +130,13 @@ func main() {
 	})
 
 	router.GET("/projects", func(c *gin.Context) {
-		// Built from the project headings in the project-*.html templates,
+		// Built from the project headings in the project-*.html files,
 		// so a new project shows up on the timeline without other edits
-		timeline, err := LoadProjectTimeline("templates/pages/project-*.html", time.Now())
+		timeline, err := LoadProjectTimeline(projectGlob, time.Now())
 		if err != nil {
 			log.Printf("Could not load project timeline: %v", err)
 		}
-		projects, err := LoadProjectPages("templates/pages/project-*.html")
+		projects, err := LoadProjectPages(projectGlob)
 		if err != nil {
 			log.Printf("Could not load projects: %v", err)
 		}
@@ -143,7 +149,7 @@ func main() {
 	})
 
 	router.GET("/projects/:id", func(c *gin.Context) {
-		projects, err := LoadProjectPages("templates/pages/project-*.html")
+		projects, err := LoadProjectPages(projectGlob)
 		if err != nil {
 			log.Printf("Could not load projects: %v", err)
 		}
@@ -168,6 +174,12 @@ func main() {
 	})
 	router.GET("/hardware/:id", func(c *gin.Context) {
 		c.Redirect(http.StatusMovedPermanently, "/projects/"+c.Param("id"))
+	})
+
+	router.GET("/colophon", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "colophon.html", gin.H{
+			"title": "Colophon",
+		})
 	})
 
 	router.GET("/reads", func(c *gin.Context) {

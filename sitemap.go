@@ -23,7 +23,7 @@ type urlSet struct {
 // date, so they have none.
 func GenerateSitemap(posts []BlogPost, projects []ProjectPage) (string, error) {
 	set := urlSet{Xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9"}
-	for _, path := range []string{"/", "/blog", "/projects", "/reads"} {
+	for _, path := range []string{"/", "/blog", "/projects", "/reads", "/colophon"} {
 		set.URLs = append(set.URLs, sitemapURL{Loc: siteURL + path})
 	}
 	for _, p := range posts {

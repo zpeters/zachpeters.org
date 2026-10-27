@@ -12,6 +12,8 @@ COPY --from=builder /app/website .
 # The sparkline fetches from github.com over HTTPS
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY ./templates/ templates/
+COPY ./pages/ pages/
+COPY ./projects/ projects/
 COPY ./assets/ assets/
 COPY ./blog/ blog/
 COPY ./reads/ reads/
