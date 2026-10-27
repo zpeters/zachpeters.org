@@ -27,7 +27,7 @@ but I know there are places I can get even more efficient.
 ### Rust
 Nothing too new; I've been using it for years.  However, I have managed to standardize on it at home and work for most things.  I'll still build the odd
 app or service in a random language to learn, but for real work I'm reaching
-for rust.
+for Rust.
 
 Over the past few years it's really become more mainstream with acceptance into
 the Linux kernel and other high-visibility projects.  Major corporations have
@@ -79,7 +79,7 @@ Recently, I've taken to reading a few papers every day, so I quickly needed some
 
 ## Stuff I built
 ### Beeline
-For years, I've been trying out different api clients.  It started with Postman, then Insomnia, and most recently Bruno.  The story was the same, each time I left one because it got too bloated.  Finally, I gave up on Bruno and just created my own.
+For years, I've been trying out different API clients.  It started with Postman, then Insomnia, and most recently Bruno.  The story was the same, each time I left one because it got too bloated.  Finally, I gave up on Bruno and just created my own.
 
 My plan with "beeline" is to just keep it as minimal as possible, while being compatible with a wide variety of import and export options.
 

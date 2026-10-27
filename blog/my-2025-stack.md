@@ -23,7 +23,7 @@ What I really like about Logseq over other editors is the <em>outline first</em>
 
 ## VHS
 
-As you can see from the demo below, [VHS](https://github.com/charmbracelet/vhs?tab=readme-ov-file#vhs-command-reference) is a <em>screen recorder for the terminal</em>. For terminal based apps a lot of time a text description is great, but a screencast is really great for showing off how commands can work together and for showing off tui apps. There is another app called [asciinema](https://asciinema.org/) but I enjoy this a little more.
+As you can see from the demo below, [VHS](https://github.com/charmbracelet/vhs?tab=readme-ov-file#vhs-command-reference) is a <em>screen recorder for the terminal</em>. For terminal based apps a lot of the time, a text description is great, but a screencast is really great for showing off how commands can work together and for showing off tui apps. There is another app called [asciinema](https://asciinema.org/) but I enjoy this a little more.
 
 <figure>
   <img src="/assets/img/vhs.gif" alt="animated gif of working in helix to edit a webpage">

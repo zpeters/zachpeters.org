@@ -17,7 +17,7 @@ The other piece that brings me joy is that I never share these creations.  This 
 
 This is my oldest "handmade tool".  In a Ship of Theseus way, I constantly rebuild it every few months piece by piece.  This is one of my favorite ways to learn more techniques or programming languages.  The scope is very small and pretty well-defined at this point.
 
-Off the top of my head I've probably rewritten this in: Haskell, Go, Rust, and half a dozen other languages.  This also gives me a good way to compare the strengths and weaknesses of new languages.  When I started this exercise over a decade ago, I would often find myself trying to write in the same <em>style</em> every time.  As I gained experience and dare I say <em>wisdom</em> I learned to "write to the language" and try to take advantage of each languages unique qualities. 
+Off the top of my head I've probably rewritten this in: Haskell, Go, Rust, and half a dozen other languages.  This also gives me a good way to compare the strengths and weaknesses of new languages.  When I started this exercise over a decade ago, I would often find myself trying to write in the same <em>style</em> every time.  As I gained experience and dare I say <em>wisdom</em> I learned to "write to the language" and try to take advantage of each language's unique qualities. 
 
 Here is an example of the latest incarnation. There are really only two commands: `list` will scan all of the directories in my `$HOME` for any git repos that have <em>changes</em> and lists them, `go` will <em>autocommit</em> all of them, or it will match a partial string.  That's it!
 
@@ -28,7 +28,7 @@ Usage:
 
 Available Commands:
   completion  Generate the autocompletion script for the specified shell
-  go          Auto-commit changes in all or specified directores
+  go          Auto-commit changes in all or specified directories
   help        Help about any command
   list        List all directories that have changed
 
@@ -52,11 +52,11 @@ Use "k [command] --help" for more information about a command.
 
 To be clear this really is a <em>stack</em> and not a <em>queue</em>.  The reason it's called `q` is just because that is very short to type.  This is a newer tool that is still very much a work in progress.
 
-I really hate cloud storage.  I can't stand having yet another drive to copy files back and forth from.  Even worse, I spend most of my time in the command line, so copying to a special folder to sync to a drive is usually a pain.  My use case is probably different than most.  I rarely use cloud storage to share files, its more often about getting a file from point a to point b.
+I really hate cloud storage.  I can't stand having yet another drive to copy files back and forth from.  Even worse, I spend most of my time in the command line, so copying to a special folder to sync to a drive is usually a pain.  My use case is probably different than most.  I rarely use cloud storage to share files, it's more often about getting a file from point a to point b.
 
-Instead of "going to" the data but finding the cloud storage or shared drive, I want to bring the "storage" to me!  The basic concept is that i can run my `q` command to <em>push</em> a file onto a stack.  This stack is a remote store on a server.  Then, on a different system, I can do a simple <em>pop</em> to drop the file in the current directory.
+Instead of "going to" the data but finding the cloud storage or shared drive, I want to bring the "storage" to me!  The basic concept is that I can run my `q` command to <em>push</em> a file onto a stack.  This stack is a remote store on a server.  Then, on a different system, I can do a simple <em>pop</em> to drop the file in the current directory.
 
-I plan to support many of the basic <em>stack like</em> commands, as well as text and binary data.  Just thinkig about this it seems like somethign I'd use pretty frequently.  Even on the same computer I could see having a handy "scratch" space with files I'm frequently using.  Or by just adding text, you could use this as a basic shared clipboard.
+I plan to support many of the basic <em>stack like</em> commands, as well as text and binary data.  Just thinking about this it seems like something I'd use pretty frequently.  Even on the same computer I could see having a handy "scratch" space with files I'm frequently using.  Or by just adding text, you could use this as a basic shared clipboard.
 
 Planned commands:
 
@@ -84,8 +84,8 @@ Flags:
 
 [Notes](/software#notes)
 
-This might be my least creatively named app.  <em>Notes is just what it sounds like</em> it is an app for taking notes.  I hesitate to even call it it app.  Really this is just a collection of `fish` shell scripts.  But with a few bodged together scripts, I a tool that fits my needs closer than <em>any</em> other note taking tool I have ever used.
+This might be my least creatively named app.  <em>Notes is just what it sounds like</em> it is an app for taking notes.  I hesitate to even call it an app.  Really this is just a collection of `fish` shell scripts.  But with a few bodged together scripts, I have a tool that fits my needs closer than <em>any</em> other note taking tool I have ever used.
 
-Don't get me wrong, the design and egronomics are not great, but it gets the job done. The motivation behind this is that I wanted to be able to write and search notes without breaking my flow.  This does exactly that.  All commands are from the shell and everything uses some form of "quick search" (aka type to search) so it feels blazing fast.  
+Don't get me wrong, the design and ergonomics are not great, but it gets the job done. The motivation behind this is that I wanted to be able to write and search notes without breaking my flow.  This does exactly that.  All commands are from the shell and everything uses some form of "quick search" (aka type to search) so it feels blazing fast.  
 
-Another benefit is that its all plain text, so when i get the itch to move on there is nothing stopping me.  When i want to rewrite this from shell to Go, it will be ready.  This is a good reminder to me to start simple and small and only build up when you need it. This is software that will <em>evolve</em>
+Another benefit is that it's all plain text, so when I get the itch to move on there is nothing stopping me.  When I want to rewrite this from shell to Go, it will be ready.  This is a good reminder to me to start simple and small and only build up when you need it. This is software that will <em>evolve</em>

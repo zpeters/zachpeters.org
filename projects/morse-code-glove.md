@@ -13,7 +13,7 @@ Nevertheless, I decided to see this one through. Please excuse my primitive cons
 <img src="/assets/img/morse-code-glove/20160724-IMG_20160724_085317-thumb.webp">
 </figure>
 
-The core of this project came together pretty quickly. Construction as you can see is very rough, but it was enough to get the basic concept going. Within a few minutes of its creation i could easily switch tracks and adjust the volume on my media player with little mental interruption of the task i was working on.
+The core of this project came together pretty quickly. Construction as you can see is very rough, but it was enough to get the basic concept going. Within a few minutes of its creation I could easily switch tracks and adjust the volume on my media player with little mental interruption of the task I was working on.
 
 <figure>
 <img src="/assets/img/morse-code-glove/20160724-IMG_20160724_085127-thumb.webp">
@@ -23,7 +23,7 @@ Future experimentation would be around the glove. As you can imagine it’s very
 
 ### Hardware Interface
 
-This just decodes finger touches (dit and dah) into letters just as if you had typed them into a keyboard. This makes it very simple to interface with other software. In my experimentation i created a simple script menu[^2] to run different commands to control a music player.
+This just decodes finger touches (dit and dah) into letters just as if you had typed them into a keyboard. This makes it very simple to interface with other software. In my experimentation I created a simple script menu[^2] to run different commands to control a music player.
 
 ### Construction
 
@@ -46,7 +46,7 @@ This just decodes finger touches (dit and dah) into letters just as if you had t
 </tr>
 <tr>
 <td>Glove</td>
-<td>The cheapest conductive glove i could find at Walmart</td>
+<td>The cheapest conductive glove I could find at Walmart</td>
 <td class="num">$3.95</td>
 <td><a href="https://goo.gl/pWZz7M">http://goo.gl/pWZz7M</a></td>
 </tr>
