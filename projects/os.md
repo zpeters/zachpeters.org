@@ -1,6 +1,7 @@
 ---
 name: "Oblique Strategies"
 years: "2022"
+date: "2026-10-25T19:24:58-0500"
 summary: "My own digital version of the Oblique Strategies cards by Brian Eno and Peter Schmidt, built with Phoenix."
 ---
 

@@ -10,7 +10,6 @@ import (
 	"sort"
 	"strings"
 	"time"
-	"unicode"
 
 	"github.com/aquilax/truncate"
 	"github.com/goccy/go-yaml"
@@ -22,7 +21,7 @@ type BlogPost struct {
 	Date          time.Time
 	FormattedDate string
 	Title         string
-	URL           string
+	URL           string // the file name without .md, e.g. "coding-for-one"
 	Content       string
 	HTML          template.HTML // Content rendered to HTML, once, at load
 	Excerpt       string        // first sentence, plain text
@@ -38,18 +37,12 @@ func LoadBlogPosts(postsDir string) ([]BlogPost, error) {
 
 	for _, file := range files {
 		base := filepath.Base(file)
-		date, err := parseFilename(base)
-		if err != nil {
-			log.Printf("Skipping file %s due to parsing error: %v", base, err)
-			continue
-		}
-
 		src, err := os.ReadFile(file)
 		if err != nil {
 			log.Printf("Skipping file %s: %v", base, err)
 			continue
 		}
-		title, content, err := parsePost(src)
+		title, date, content, err := parsePost(src)
 		if err != nil {
 			log.Printf("Skipping file %s: %v", base, err)
 			continue
@@ -59,7 +52,7 @@ func LoadBlogPosts(postsDir string) ([]BlogPost, error) {
 			Date:          date,
 			FormattedDate: FormatDate(date),
 			Title:         title,
-			URL:           slugify(title),
+			URL:           strings.TrimSuffix(base, ".md"),
 			Content:       content,
 			HTML:          template.HTML(RenderMarkdown([]byte(content))),
 			Excerpt:       Excerpt(content),
@@ -104,67 +97,34 @@ func GenerateRssFeed(posts []BlogPost) (string, error) {
 	return feed.ToRss()
 }
 
-// parseFilename reads the post date from a file named <date>_<name>.md. The
-// name after the first underscore is free text: the title comes from the
-// front matter, so it can hold any characters.
-func parseFilename(filename string) (time.Time, error) {
-	base := strings.TrimSuffix(filepath.Base(filename), filepath.Ext(filename))
-
-	dateTimeString, _, found := strings.Cut(base, "_")
-	if !found {
-		return time.Time{}, fmt.Errorf("filename must be <date>_<name>.md")
-	}
-
-	date, err := time.Parse("2006-01-02T15:04:05-0700", dateTimeString)
-	if err != nil {
-		return time.Time{}, fmt.Errorf("error parsing datetime from filename: %v", err)
-	}
-
-	return date, nil
-}
-
-// parsePost splits a post into its title (from the front matter) and its
-// markdown body. The front matter must be a title line between two --- lines.
-func parsePost(src []byte) (string, string, error) {
+// parsePost splits a post into its title and date (from the front matter)
+// and its markdown body. The front matter must give a title and a date
+// between two --- lines.
+func parsePost(src []byte) (string, time.Time, string, error) {
 	src = bytes.ReplaceAll(src, []byte("\r\n"), []byte("\n"))
 	if !bytes.HasPrefix(src, []byte("---\n")) {
-		return "", "", fmt.Errorf("no front matter")
+		return "", time.Time{}, "", fmt.Errorf("no front matter")
 	}
 	meta, body, ok := bytes.Cut(src[len("---\n"):], []byte("\n---\n"))
 	if !ok {
-		return "", "", fmt.Errorf("front matter is not closed with ---")
+		return "", time.Time{}, "", fmt.Errorf("front matter is not closed with ---")
 	}
 
 	var m struct {
 		Title string `yaml:"title"`
+		Date  string `yaml:"date"`
 	}
 	if err := yaml.Unmarshal(meta, &m); err != nil {
-		return "", "", fmt.Errorf("front matter: %w", err)
+		return "", time.Time{}, "", fmt.Errorf("front matter: %w", err)
 	}
 	if m.Title == "" {
-		return "", "", fmt.Errorf("front matter needs a title")
+		return "", time.Time{}, "", fmt.Errorf("front matter needs a title")
 	}
-	return m.Title, string(bytes.TrimSpace(body)), nil
-}
-
-// slugify makes a URL path part from a title: lower case, letters and digits
-// only, words joined by hyphens. Apostrophes are dropped, not hyphenated.
-func slugify(title string) string {
-	var b strings.Builder
-	hyphen := false
-	for _, r := range strings.ToLower(title) {
-		switch {
-		case r == '\'' || r == '’':
-			// dropped
-		case unicode.IsLetter(r) || unicode.IsDigit(r):
-			b.WriteRune(r)
-			hyphen = false
-		case !hyphen && b.Len() > 0:
-			b.WriteByte('-')
-			hyphen = true
-		}
+	date, err := parseTimestamp(m.Date)
+	if err != nil {
+		return "", time.Time{}, "", fmt.Errorf("front matter: %w", err)
 	}
-	return strings.TrimSuffix(b.String(), "-")
+	return m.Title, date, string(bytes.TrimSpace(body)), nil
 }
 
 func FormatDate(t time.Time) string {

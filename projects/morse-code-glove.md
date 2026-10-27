@@ -1,6 +1,7 @@
 ---
 name: "Morse Code Glove"
 years: "2016"
+date: "2026-10-26T19:04:19-0500"
 summary: "A glove that turns finger taps into Morse letters."
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Coding for One
+date: "2024-03-02T20:13:54-0600"
 ---
 
 <span class="newthought">There is something satisfying</span> about creating tools with a single user in mind.  It's not because I think I can <em>write</em> better code than what is already out there. The motivation comes from the simplicity of creating exactly what I need - no more, no less.

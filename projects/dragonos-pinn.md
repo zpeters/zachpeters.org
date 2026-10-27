@@ -1,6 +1,7 @@
 ---
 name: "DragonOS for PINN"
 years: "2026"
+date: "2026-10-25T19:24:58-0500"
 summary: "Running DragonOS on a Raspberry Pi through the PINN bootloader, so one Pi can boot several images."
 ---
 

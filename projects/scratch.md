@@ -1,6 +1,7 @@
 ---
 name: "Scratch Notes"
 years: "2023-Current"
+date: "2026-10-25T19:24:58-0500"
 summary: "A minimal note-taking app written in Go and SQLite, with Litestream backups to remote storage."
 ---
 

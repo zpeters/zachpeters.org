@@ -1,5 +1,6 @@
 ---
 title: My 2025 "Stack"
+date: "2025-01-01T00:00:00-0500"
 ---
 
 <span class="newthought">A few of the tools</span> I use every day, and why I like them.

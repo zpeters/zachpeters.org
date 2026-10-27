@@ -17,6 +17,7 @@ func TestLoadProjectPages(t *testing.T) {
 	write("old.md", `---
 name: "Old Thing"
 years: "2015"
+date: "2015-03-01T12:00:00-0500"
 summary: "An old thing."
 ---
 
@@ -25,6 +26,7 @@ Full text.
 	write("new.md", `---
 name: "New Thing"
 years: "2017-2019"
+date: "2019-06-01T12:00:00-0500"
 summary: "A new thing."
 ---
 
@@ -35,6 +37,7 @@ Newer text with a note[^1].
 	write("plain.md", `---
 name: "Plain"
 years: "2020"
+date: "2020-01-01T12:00:00-0500"
 ---
 
 No summary.
@@ -87,6 +90,8 @@ func TestParseProjectPageErrors(t *testing.T) {
 	cases := map[string]string{
 		"no front matter": "Just text.\n",
 		"not closed":      "---\nname: \"X\"\nyears: \"2020\"\n",
+		"missing date":    "---\nname: \"X\"\nyears: \"2020\"\n---\n",
+		"bad date":        "---\nname: \"X\"\nyears: \"2020\"\ndate: \"2020\"\n---\n",
 		"missing years":   "---\nname: \"X\"\n---\n",
 		"missing name":    "---\nyears: \"2020\"\n---\n",
 		"bad yaml":        "---\nname: [unclosed\n---\n",

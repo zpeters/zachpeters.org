@@ -1,6 +1,7 @@
 ---
 name: "Folder Cam"
 years: "2015"
+date: "2024-02-20T21:28:16-0600"
 summary: "A 1940s folding camera with a Raspberry Pi in its bellows, built in 2015 to take photos and sync them to a home server."
 ---
 

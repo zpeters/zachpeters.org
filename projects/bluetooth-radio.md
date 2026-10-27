@@ -1,6 +1,7 @@
 ---
 name: "Bluetooth Radio"
 years: "2017"
+date: "2024-02-20T20:01:00-0600"
 summary: "An old clock radio, rebuilt with a Bluetooth amplifier board as a housewarming gift in 2017."
 ---
 

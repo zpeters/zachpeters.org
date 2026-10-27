@@ -1,6 +1,7 @@
 ---
 name: "Ok - The Version Control Helper"
 years: "2006-Current"
+date: "2026-10-25T19:24:58-0500"
 summary: "A small tool that finds changed git repos in my home folder, and the project I rewrite every few months to learn new languages."
 ---
 

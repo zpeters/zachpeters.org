@@ -1,6 +1,7 @@
 ---
 name: "Deep Thoughts"
 years: "2020"
+date: "2026-10-25T19:24:58-0500"
 summary: "A Svelte mini-app that mixes Jack Handey's Deep Thoughts with the Astronomy Picture of the Day."
 ---
 

@@ -7,7 +7,7 @@ import (
 )
 
 func TestParseRead(t *testing.T) {
-	src := "---\ntitle: Slow\nauthor: Derek Sivers\nurl: https://sive.rs/slow\nadded: 2026-10-19\n---\n\nTake your time[^1].\n\n[^1]: Really.\n"
+	src := "---\ntitle: Slow\nauthor: Derek Sivers\nurl: https://sive.rs/slow\ndate: \"2026-10-19T00:00:00-0500\"\n---\n\nTake your time[^1].\n\n[^1]: Really.\n"
 	r, err := ParseRead("slow", []byte(src))
 	if err != nil {
 		t.Fatal(err)
@@ -15,8 +15,8 @@ func TestParseRead(t *testing.T) {
 	if r.ID != "slow" || r.Title != "Slow" || r.Author != "Derek Sivers" || r.URL != "https://sive.rs/slow" || r.Year != 0 {
 		t.Errorf("read = %+v", r)
 	}
-	if !r.Added.Equal(time.Date(2026, 10, 19, 0, 0, 0, 0, time.UTC)) {
-		t.Errorf("added = %v", r.Added)
+	if !r.Date.Equal(time.Date(2026, 10, 19, 5, 0, 0, 0, time.UTC)) {
+		t.Errorf("date = %v", r.Date)
 	}
 	if !strings.Contains(string(r.Notes), `id="sn-slow-1"`) {
 		t.Errorf("sidenote id not prefixed: %s", r.Notes)
@@ -27,8 +27,8 @@ func TestParseReadErrors(t *testing.T) {
 	for name, src := range map[string]string{
 		"no front matter": "Just text.\n",
 		"not closed":      "---\ntitle: X\nurl: https://x\n",
-		"no url":          "---\ntitle: X\nadded: 2026-10-19\n---\n",
-		"bad date":        "---\ntitle: X\nurl: https://x\nadded: someday\n---\n",
+		"no url":          "---\ntitle: X\ndate: \"2026-10-19T00:00:00-0500\"\n---\n",
+		"bad date":        "---\ntitle: X\nurl: https://x\ndate: someday\n---\n",
 	} {
 		if _, err := ParseRead("x", []byte(src)); err == nil {
 			t.Errorf("%s: no error", name)

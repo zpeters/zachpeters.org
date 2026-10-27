@@ -4,7 +4,7 @@ author: Simon Sarris
 year: 2021
 url: https://map.simonsarris.com/p/the-most-precious-resource-is-agency
 archive: https://archive.ph/H1tIT
-added: 2026-10-22
+date: "2026-10-22T00:00:00-0500"
 ---
 
 _meaningful work should be encouraged at all ages_

@@ -33,30 +33,25 @@ Other recipes:
 
 ### 1. Make the file
 
-Put one markdown file per post in `blog/`. The filename gives the date,
-and the front matter gives the title:
-
-```
-blog/2026-10-18T21:30:00-0500_Recommended-Apps.md
-     └──── date and time ────┘ └─ any text ─┘
-```
+Put one markdown file per post in `blog/`. The file name is the URL, and
+the front matter gives the title and the date:
 
 ```markdown
 ---
 title: Recommended Apps
+date: "2026-10-18T21:30:00-0500"
 ---
 
 The text of the post starts here.
 ```
 
-- **Date:** `YYYY-MM-DDTHH:MM:SS` plus the UTC offset (`-0500` for
-  US Central daylight time, `-0600` for standard time).
-- **Underscore:** one `_` between the date and the rest of the name. The
-  rest of the name is not used for the title, so it can hold anything.
-- **Title:** the `title:` line in the front matter. It can contain any
-  characters, including `-` and `_`.
-- **URL:** the title in lowercase, with punctuation removed and words
-  joined by `-`, for example `/blog/recommended-apps`.
+- **File name:** `<id>.md`, where `<id>` is the URL in lowercase, with
+  words joined by `-`. For example, `recommended-apps.md` is at
+  `/blog/recommended-apps`.
+- **`title`:** the title. It can contain any characters, including `-` and `_`.
+- **`date`:** the time you wrote the post, as `YYYY-MM-DDTHH:MM:SS` plus the
+  UTC offset (`-0500` for US Central daylight time, `-0600` for standard
+  time). A date with no time is an error.
 
 ### 2. Write the first sentence with care
 
@@ -152,6 +147,7 @@ addresses redirect to the Projects page.
    ---
    name: "Dropsearch"
    years: "2024-Current"
+   date: "2026-10-25T19:24:58-0500"
    summary: "One or two sentences the Projects list shows under the title."
    ---
 
@@ -162,6 +158,8 @@ addresses redirect to the Projects page.
      years in brackets, for example "Dropsearch (2024-Current)". The table
      below says what `years` can be. A file with other years still has a
      page, but it is not on the timeline.
+   - **`date`:** required. The time the file was written, as a timestamp like
+     the blog's, for example `"2026-10-25T19:24:58-0500"`.
    - **`summary`:** optional. Without it, the project is listed with no
      summary.
    - **The file name** is the `<id>`. It must be different from all other
@@ -207,7 +205,7 @@ author: Dan McKinley
 year: 2015
 url: https://mcfunley.com/choose-boring-technology
 archive: http://archive.today/2024.01.04-012806/https://mcfunley.com/choose-boring-technology
-added: 2026-10-19
+date: "2026-10-19T00:00:00-0500"
 ---
 
 Why you like it, in a few sentences. Sidenotes[^1] work as in blog posts.
@@ -218,8 +216,8 @@ Why you like it, in a few sentences. Sidenotes[^1] work as in blog posts.
 - **Filename:** short, lowercase, words joined by `-`, for example
   `choose-boring-technology.md`. It is the anchor on the page
   (`/reads#choose-boring-technology`).
-- **`title`, `url`, `added`:** necessary. `added` is the date you added it
-  (`YYYY-MM-DD`). The page shows the newest first.
+- **`title`, `url`, `date`:** necessary. `date` is when you added it, as a
+  timestamp like the blog's. The page shows the newest first.
 - **`author`, `year`, `archive`:** optional. They show in the margin.
   `year` is when the article was written. It also puts the read on the
   chart at the top of the page; a read without a `year` is not on it.

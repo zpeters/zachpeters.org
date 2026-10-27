@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 
 	"github.com/goccy/go-yaml"
 )
@@ -18,6 +19,7 @@ type ProjectPage struct {
 	ID      string        // the file name without .md, e.g. "ds"
 	Name    string        // e.g. "Dropsearch"
 	Years   string        // e.g. "2015" or "2017-2019"
+	Date    time.Time     // when the file was written
 	Start   int           // first year, for sorting; 0 when unknown
 	Summary string        // one line, shown on the projects list
 	Body    template.HTML // the rendered page, without the heading
@@ -27,6 +29,7 @@ type ProjectPage struct {
 type projectMeta struct {
 	Name    string `yaml:"name"`
 	Years   string `yaml:"years"`
+	Date    string `yaml:"date"`
 	Summary string `yaml:"summary"`
 }
 
@@ -51,7 +54,12 @@ func ParseProjectPage(id string, src []byte) (ProjectPage, error) {
 		return ProjectPage{}, fmt.Errorf("%s: front matter needs a name and years", id)
 	}
 
+	date, err := parseTimestamp(m.Date)
+	if err != nil {
+		return ProjectPage{}, fmt.Errorf("%s: %w", id, err)
+	}
 	p := ProjectPage{
+		Date:    date,
 		ID:      id,
 		Name:    m.Name,
 		Years:   m.Years,

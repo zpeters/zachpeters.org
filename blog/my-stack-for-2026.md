@@ -1,5 +1,6 @@
 ---
 title: My Stack for 2026
+date: "2026-10-22T09:40:00-0500"
 ---
 
 <span class="newthought">Every so often I like to reinvent</span> how I work

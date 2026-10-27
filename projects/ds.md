@@ -1,6 +1,7 @@
 ---
 name: "Dropsearch"
 years: "2024-Current"
+date: "2026-10-25T19:24:58-0500"
 summary: "A small search app that taught me Meilisearch, with plans to grow it into a bookmarks and history search."
 ---
 

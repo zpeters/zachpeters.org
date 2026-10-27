@@ -23,7 +23,7 @@ type Read struct {
 	Year    int    // when it was written; 0 when unknown
 	URL     string // the original
 	Archive string // a saved copy, in case the original goes away
-	Added   time.Time
+	Date    time.Time
 	Notes   template.HTML
 }
 
@@ -33,13 +33,13 @@ type readMeta struct {
 	Year    int    `yaml:"year"`
 	URL     string `yaml:"url"`
 	Archive string `yaml:"archive"`
-	Added   string `yaml:"added"`
+	Date    string `yaml:"date"`
 }
 
 var frontMatterFence = []byte("---\n")
 
 // ParseRead reads one reads/ file. The front matter must give a title, a
-// url and the date it was added (YYYY-MM-DD).
+// url and the date and time it was added.
 func ParseRead(id string, src []byte) (Read, error) {
 	src = bytes.ReplaceAll(src, []byte("\r\n"), []byte("\n"))
 	if !bytes.HasPrefix(src, frontMatterFence) {
@@ -57,9 +57,9 @@ func ParseRead(id string, src []byte) (Read, error) {
 	if m.Title == "" || m.URL == "" {
 		return Read{}, fmt.Errorf("front matter needs a title and a url")
 	}
-	added, err := time.Parse("2006-01-02", m.Added)
+	date, err := parseTimestamp(m.Date)
 	if err != nil {
-		return Read{}, fmt.Errorf("added: %w", err)
+		return Read{}, fmt.Errorf("date: %w", err)
 	}
 	return Read{
 		ID:      id,
@@ -68,7 +68,7 @@ func ParseRead(id string, src []byte) (Read, error) {
 		Year:    m.Year,
 		URL:     m.URL,
 		Archive: m.Archive,
-		Added:   added,
+		Date:    date,
 		// Prefix the sidenote ids, so notes in two reads on one page do not clash
 		Notes: template.HTML(renderMarkdown(bytes.TrimSpace(body), "sn-"+id+"-")),
 	}, nil
@@ -94,7 +94,7 @@ func LoadReads(dir string) ([]Read, error) {
 		}
 		reads = append(reads, r)
 	}
-	sort.SliceStable(reads, func(i, j int) bool { return reads[i].Added.After(reads[j].Added) })
+	sort.SliceStable(reads, func(i, j int) bool { return reads[i].Date.After(reads[j].Date) })
 	return reads, nil
 }
 
