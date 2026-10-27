@@ -1,5 +1,5 @@
 image := "registry.home.zach/zachpeters.org"
-version := "0.2.2"
+version := "0.3.0"
 # This machine is arm64; the cluster is x86_64, so build on a remote x86
 # podman. Create the connection once:
 #   podman system connection add cluster ssh://user@host/run/user/1000/podman/podman.sock
