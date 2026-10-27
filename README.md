@@ -139,70 +139,61 @@ or a deploy. It then shows:
 
 ## Projects
 
-Every project is one file, `projects/<id>.html`. Software
+Every project is one file, `projects/<id>.md`. Software
 and hardware projects are the same kind of thing, so there is no split.
 The Projects page (`/projects`) lists them with a summary. Each project has
-its own page at `/projects/<id>` that shows the whole file. The old
-`/software` and `/hardware` addresses redirect to the Projects page.
+its own page at `/projects/<id>`. The old `/software` and `/hardware`
+addresses redirect to the Projects page.
 
-1. **Make the file** `projects/<id>.html`. Put the heading and a summary first:
+1. **Make the file** `projects/<id>.md`. Start it with front matter, then
+   write the page in markdown:
 
-   ```html
-   <section>
-     <h3 id="dropsearch">Dropsearch (2024-Current)</h3>
-     <p class="summary">
-       One or two sentences the Projects list shows under the title.
-     </p>
-     <p>
-       What it is and why you built it.
-     </p>
-   </section>
+   ```markdown
+   ---
+   name: "Dropsearch"
+   years: "2024-Current"
+   summary: "One or two sentences the Projects list shows under the title."
+   ---
+
+   What it is and why you built it.
    ```
 
-   - The `<h3>` line must have this form, on one line:
-     `<h3 id="SHORT-ID">Project Name (YEARS)</h3>`. The table below says
-     what YEARS can be. A file without this heading is not listed.
-   - The `<p class="summary">` is required to show a summary. Without it,
-     the project is listed with no summary.
-   - The `id` must be different from all other project ids. The timeline,
-     the list and the project's page address all use it.
+   - **`name` and `years`:** required. The page heading is the name and the
+     years in brackets, for example "Dropsearch (2024-Current)". The table
+     below says what `years` can be. A file with other years still has a
+     page, but it is not on the timeline.
+   - **`summary`:** optional. Without it, the project is listed with no
+     summary.
+   - **The file name** is the `<id>`. It must be different from all other
+     project files. The timeline, the list and the page address all use it.
 
-   | YEARS          | Meaning                          | On the timeline                         |
+   | years          | Meaning                          | On the timeline                         |
    | -------------- | -------------------------------- | --------------------------------------- |
    | `2022`         | One year                         | A dot in that year                      |
    | `2017-2019`    | Finished, over several years     | A line with a dot at each end           |
    | `2023-Current` | Still active, started in 2023    | A dot, then a line to "now"             |
    | `Ongoing`      | Still active, start not known    | A dashed start, then a line to "now"    |
 
-   `Present` and `Now` work in place of `Current`. A heading without one of
-   these forms still shows on the page, but not on the timeline.
+   `Present` and `Now` work in place of `Current`.
 
-2. **Nothing else.** The Projects pages read the files each time they are
+2. **Sidenotes** work as in blog posts: `text[^1]` in the text, and
+   `[^1]: The note.` at the end of the file.
+
+3. **Figures, tables and iframes** are raw HTML. Put a blank line before and
+   after each block, and do not put a blank line inside it. A blank line
+   ends the HTML block early, and the rest of it is shown as broken
+   markdown. Add images in `assets/img/<id>/` as `.webp`, with margin
+   captions (see "Images" above).
+
+4. **Nothing else.** The Projects pages read the files each time they are
    opened, so a new file shows up after a save and refresh, with no
    restart. Projects appear newest first on the list, and by start year on
-   the timeline.
-
-3. **Add images** in `assets/img/<id>/` as `.webp`, with margin captions
-   (see "Images" above). Put each `<figure>` between paragraphs, not inside
-   a `<p>`.
+   the timeline. If a file has an error, the log names it, and the Projects
+   pages show no projects until it is fixed.
 
 The list page is `pages/projects.html`, and the project page
-wrapper is `templates/include/project-page.html`. The site reads every `*.html`
+wrapper is `templates/include/project-page.html`. The site reads every `*.md`
 file in `projects/` as a project, so keep other files out of that folder.
-
-### Sidenotes on project pages
-
-Project files are HTML, not markdown, so a sidenote uses Tufte's markup:
-
-```html
-for example, I use this for dotfiles
-<label for="dotfiles" class="margin-toggle sidenote-number"></label>
-<input type="checkbox" id="dotfiles" class="margin-toggle" />
-<span class="sidenote">I use <a href="https://www.gnu.org/software/stow/">GNU Stow</a> to manage my files.</span>.
-```
-
-The `for` and `id` values must match each other and be different on the
-page.
 
 ## Reads
 
