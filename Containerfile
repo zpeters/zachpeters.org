@@ -2,7 +2,8 @@ FROM docker.io/golang:1.27 as builder
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
-COPY *.go ./
+COPY main.go ./
+COPY internal/ internal/
 ARG VERSION=dev
 RUN go build -ldflags "-X main.version=${VERSION}" .
 

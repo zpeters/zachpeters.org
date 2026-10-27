@@ -1,4 +1,4 @@
-package main
+package site
 
 import (
 	"strings"
@@ -37,7 +37,7 @@ func TestParseReadErrors(t *testing.T) {
 }
 
 func TestLoadReads(t *testing.T) {
-	reads, err := LoadReads("reads/")
+	reads, err := LoadReads("../../reads/")
 	if err != nil {
 		t.Fatal(err)
 	}
