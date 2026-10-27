@@ -5,17 +5,16 @@ import (
 	"time"
 )
 
-const projectsFixture = `
-<h3 id="ok">Ok - The Git Helper (Ongoing)</h3>
-<h3 id="ds">Dropsearch (2024-Current)</h3>
-<h3 id="radio">Radio (2017-2019)</h3>
-<h3 id="os">Oblique Strategies (2022)</h3>
-<h3 id="misc">Not a project</h3>
-<h3 id="bad">Odd (someday)</h3>
-`
+var projectsFixture = []ProjectPage{
+	{ID: "ok", Name: "Ok - The Git Helper", Years: "Ongoing"},
+	{ID: "ds", Name: "Dropsearch", Years: "2024-Current"},
+	{ID: "radio", Name: "Radio", Years: "2017-2019"},
+	{ID: "os", Name: "Oblique Strategies", Years: "2022"},
+	{ID: "bad", Name: "Odd", Years: "someday"},
+}
 
-func TestParseProjects(t *testing.T) {
-	got := ParseProjects(projectsFixture)
+func TestProjectsFromPages(t *testing.T) {
+	got := ProjectsFromPages(projectsFixture)
 	want := []Project{
 		{ID: "ok", Name: "Ok - The Git Helper", Active: true},
 		{ID: "ds", Name: "Dropsearch", Start: 2024, Active: true},
@@ -34,7 +33,7 @@ func TestParseProjects(t *testing.T) {
 
 func TestNewProjectTimeline(t *testing.T) {
 	now := time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC)
-	tl := NewProjectTimeline(ParseProjects(projectsFixture), now)
+	tl := NewProjectTimeline(ProjectsFromPages(projectsFixture), now)
 
 	if tl.StartLabel != "2016" {
 		t.Errorf("axis starts %s, want the year before the first start", tl.StartLabel)

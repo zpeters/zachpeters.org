@@ -17,7 +17,7 @@ import (
 var version = "dev"
 
 // projectGlob matches the project pages, one file per project
-const projectGlob = "projects/*.html"
+const projectGlob = "projects/*.md"
 
 func main() {
 	router := gin.Default()
@@ -130,7 +130,7 @@ func main() {
 	})
 
 	router.GET("/projects", func(c *gin.Context) {
-		// Built from the project headings in the projects/*.html files,
+		// Built from the front matter in the projects/*.md files,
 		// so a new project shows up on the timeline without other edits
 		timeline, err := LoadProjectTimeline(projectGlob, time.Now())
 		if err != nil {

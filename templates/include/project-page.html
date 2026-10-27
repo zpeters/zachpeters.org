@@ -1,6 +1,10 @@
 {{template "header.html" .}}
 
-{{.project.Body}}
+<section>
+  <h3 id="{{.project.ID}}">{{.project.Name}} ({{.project.Years}})</h3>
+  {{if .project.Summary}}<p class="summary">{{.project.Summary}}</p>{{end}}
+  {{.project.Body}}
+</section>
 
 <p class="back"><a href="/hardware">← All hardware projects</a></p>
 

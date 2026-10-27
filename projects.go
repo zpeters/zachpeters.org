@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"os"
-	"path/filepath"
 	"regexp"
 	"sort"
 	"strconv"
@@ -12,8 +10,8 @@ import (
 	"time"
 )
 
-// Project is one project heading on a projects page, e.g.
-// <h3 id="ds">Dropsearch (2024-Current)</h3>.
+// Project is one project on the timeline. Its years come from the page's
+// front matter (see project_pages.go).
 type Project struct {
 	ID     string
 	Name   string
@@ -22,55 +20,54 @@ type Project struct {
 	Active bool // still going
 }
 
-var (
-	projectHeading = regexp.MustCompile(`<h3 id="([^"]+)">\s*(.+?)\s*\(([^)]*)\)\s*</h3>`)
-	projectYears   = regexp.MustCompile(`(?i)^(\d{4})(?:\s*[-–]\s*(\d{4}|current|present|now))?$`)
-)
+var projectYears = regexp.MustCompile(`(?i)^(\d{4})(?:\s*[-–]\s*(\d{4}|current|present|now))?$`)
 
-// ParseProjects reads the project headings in a page template. The text in
-// parentheses gives the years: "2022", "2017-2019", "2023-Current" or
-// "Ongoing". Headings without one of these are skipped.
-func ParseProjects(src string) []Project {
+// parseProject makes a Project from a page's name and years. The years are
+// "2022", "2017-2019", "2023-Current" or "Ongoing". Other years are not
+// on the timeline, and parseProject returns false for them.
+func parseProject(id, name, years string) (Project, bool) {
+	p := Project{ID: id, Name: name}
+	years = strings.TrimSpace(years)
+	if strings.EqualFold(years, "ongoing") {
+		p.Active = true
+		return p, true
+	}
+	y := projectYears.FindStringSubmatch(years)
+	if y == nil {
+		return Project{}, false
+	}
+	p.Start, _ = strconv.Atoi(y[1])
+	switch end, err := strconv.Atoi(y[2]); {
+	case y[2] == "":
+		p.End = p.Start
+	case err == nil:
+		p.End = end
+	default:
+		p.Active = true
+	}
+	return p, true
+}
+
+// ProjectsFromPages returns the timeline entries for the pages whose years
+// the timeline can read.
+func ProjectsFromPages(pages []ProjectPage) []Project {
 	var projects []Project
-	for _, m := range projectHeading.FindAllStringSubmatch(src, -1) {
-		p := Project{ID: m[1], Name: m[2]}
-		years := strings.TrimSpace(m[3])
-		if strings.EqualFold(years, "ongoing") {
-			p.Active = true
-		} else if y := projectYears.FindStringSubmatch(years); y != nil {
-			p.Start, _ = strconv.Atoi(y[1])
-			switch end, err := strconv.Atoi(y[2]); {
-			case y[2] == "":
-				p.End = p.Start
-			case err == nil:
-				p.End = end
-			default:
-				p.Active = true
-			}
-		} else {
-			continue
+	for _, pg := range pages {
+		if p, ok := parseProject(pg.ID, pg.Name, pg.Years); ok {
+			projects = append(projects, p)
 		}
-		projects = append(projects, p)
 	}
 	return projects
 }
 
-// LoadProjectTimeline builds the timeline for the project headings in the
-// template files that match pattern, e.g. "projects/*.html".
+// LoadProjectTimeline builds the timeline from the project files that match
+// pattern, e.g. "projects/*.md".
 func LoadProjectTimeline(pattern string, now time.Time) (*ProjectTimeline, error) {
-	paths, err := filepath.Glob(pattern)
+	pages, err := LoadProjectPages(pattern)
 	if err != nil {
 		return nil, err
 	}
-	var projects []Project
-	for _, path := range paths {
-		src, err := os.ReadFile(path)
-		if err != nil {
-			return nil, err
-		}
-		projects = append(projects, ParseProjects(string(src))...)
-	}
-	return NewProjectTimeline(projects, now), nil
+	return NewProjectTimeline(ProjectsFromPages(pages), now), nil
 }
 
 // ProjectTimeline lays projects out one per row on a range-frame year axis
