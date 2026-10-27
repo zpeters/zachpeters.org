@@ -139,14 +139,13 @@ or a deploy. It then shows:
 
 ## Projects
 
-Every project is one file, `projects/project-<id>.html`. Software
+Every project is one file, `projects/<id>.html`. Software
 and hardware projects are the same kind of thing, so there is no split.
 The Projects page (`/projects`) lists them with a summary. Each project has
 its own page at `/projects/<id>` that shows the whole file. The old
 `/software` and `/hardware` addresses redirect to the Projects page.
 
-1. **Make the file** `projects/project-<id>.html`. The name must
-   start with `project-`. Put the heading and a summary first:
+1. **Make the file** `projects/<id>.html`. Put the heading and a summary first:
 
    ```html
    <section>
@@ -188,9 +187,8 @@ its own page at `/projects/<id>` that shows the whole file. The old
    a `<p>`.
 
 The list page is `pages/projects.html`, and the project page
-wrapper is `templates/include/project-page.html`. Do not name other files
-with the `project-` prefix in `projects/`, because the site reads every
-`project-*.html` file there as a project.
+wrapper is `templates/include/project-page.html`. The site reads every `*.html`
+file in `projects/` as a project, so keep other files out of that folder.
 
 ### Sidenotes on project pages
 
