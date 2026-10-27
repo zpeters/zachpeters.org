@@ -2,3 +2,5 @@ tmp/
 website
 .direnv/
 .envrc.local
+bin/
+.claude/settings.local.json
