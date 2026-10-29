@@ -38,8 +38,8 @@ type readMeta struct {
 
 var frontMatterFence = []byte("---\n")
 
-// ParseRead reads one reads/ file. The front matter must give a title, a
-// url and the date and time it was added.
+// ParseRead reads one reads/ file. The front matter must give a title and a
+// url. The date is optional; if given, it must be a timestamp.
 func ParseRead(id string, src []byte) (Read, error) {
 	src = bytes.ReplaceAll(src, []byte("\r\n"), []byte("\n"))
 	if !bytes.HasPrefix(src, frontMatterFence) {
@@ -57,9 +57,13 @@ func ParseRead(id string, src []byte) (Read, error) {
 	if m.Title == "" || m.URL == "" {
 		return Read{}, fmt.Errorf("front matter needs a title and a url")
 	}
-	date, err := parseTimestamp(m.Date)
-	if err != nil {
-		return Read{}, fmt.Errorf("date: %w", err)
+	var date time.Time
+	if m.Date != "" {
+		d, err := parseTimestamp(m.Date)
+		if err != nil {
+			return Read{}, fmt.Errorf("date: %w", err)
+		}
+		date = d
 	}
 	return Read{
 		ID:      id,

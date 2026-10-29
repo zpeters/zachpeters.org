@@ -23,6 +23,17 @@ func TestParseRead(t *testing.T) {
 	}
 }
 
+func TestParseReadWithoutDate(t *testing.T) {
+	src := "---\ntitle: Slow\nurl: https://sive.rs/slow\n---\n\nTake your time.\n"
+	r, err := ParseRead("slow", []byte(src))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !r.Date.IsZero() {
+		t.Errorf("date = %v, want zero", r.Date)
+	}
+}
+
 func TestParseReadErrors(t *testing.T) {
 	for name, src := range map[string]string{
 		"no front matter": "Just text.\n",

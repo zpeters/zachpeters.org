@@ -216,9 +216,10 @@ Why you like it, in a few sentences. Sidenotes[^1] work as in blog posts.
 - **Filename:** short, lowercase, words joined by `-`, for example
   `choose-boring-technology.md`. It is the anchor on the page
   (`/reads#choose-boring-technology`).
-- **`title`, `url`, `date`:** necessary. `date` is when you added it, as a
-  timestamp like the blog's. The page shows the newest first.
-- **`author`, `year`, `archive`:** optional. They show in the margin.
+- **`title` and `url`:** necessary. The page lists reads A to Z by title.
+- **`date`, `author`, `year`, `archive`:** optional. `date` is when you added
+  it, as a timestamp like the blog's. The page does not show it. `author`
+  and `archive` show in the margin.
   `year` is when the article was written. It also puts the read on the
   chart at the top of the page; a read without a `year` is not on it.
 
