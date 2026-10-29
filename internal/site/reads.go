@@ -74,7 +74,7 @@ func ParseRead(id string, src []byte) (Read, error) {
 	}, nil
 }
 
-// LoadReads reads every reads/*.md file, newest added first.
+// LoadReads reads every reads/*.md file, sorted by title, A to Z.
 func LoadReads(dir string) ([]Read, error) {
 	files, err := filepath.Glob(filepath.Join(dir, "*.md"))
 	if err != nil {
@@ -94,7 +94,9 @@ func LoadReads(dir string) ([]Read, error) {
 		}
 		reads = append(reads, r)
 	}
-	sort.SliceStable(reads, func(i, j int) bool { return reads[i].Date.After(reads[j].Date) })
+	sort.SliceStable(reads, func(i, j int) bool {
+		return strings.ToLower(reads[i].Title) < strings.ToLower(reads[j].Title)
+	})
 	return reads, nil
 }
 
